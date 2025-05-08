@@ -2,7 +2,7 @@
 
 Este repositório contém o projeto de Trabalho de Conclusão de Curso (TCC) desenvolvido para a professora **Claudia Tupan**, do curso de **Desenvolvimento de Sistemas - Senac**.
 
-![Logo do Projeto](https://github.com/dmm76/tcc_senac/blob/main/src/main/java/util/images/ddr-banco.png)
+![Logo do Projeto](https://github.com/dmm76/tcc_senac/tree/main/src/main/java/util/images/ddr-banco.png)
 
 ## 📌 Descrição
 
