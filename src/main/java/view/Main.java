@@ -6,6 +6,7 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
+        String resultadoRetorno = "";
         String[] botao = {"Cadastro", "Pedido", "Encerrar"};
         String[] botaoEscolha= {"Cliente", "Fornecedor", "ProdutoItem", "FormaPagamento", "Categoria", "Marca", "Voltar"};
         String[] botaoCadastro = {"Cadastrar", "Consultar", "Alterar", "Deletar", "Voltar"};
@@ -26,15 +27,27 @@ public class Main {
                         case 2://ProdutoItem
                             break;
                         case 3://FormaPagamento
-                            opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Produto", 0,3, null, botaoCadastro, 0);
+                            opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Forma de Pagamento", 0,3, null, botaoCadastro, 0);
                             switch (opcaoCadastro){
                                 case 0://Cadastrar
+                                    formaPagamentoView.cadastrarFormaPagamento();
+                                    JOptionPane.showMessageDialog(null, "Registro cadastrado com sucesso");
                                     break;
                                 case 1://Consultar
+                                    resultadoRetorno = formaPagamentoView.consultarFormaPagamento();
+                                    JOptionPane.showMessageDialog(null, resultadoRetorno);
                                     break;
                                 case 2://Alterar
+                                    resultadoRetorno = formaPagamentoView.consultarFormaPagamento();
+                                    int id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do produto para atualizar: "));
+                                    formaPagamentoView.alterarFormaPagamento(id);
+                                    JOptionPane.showMessageDialog(null,"Registro atualizado com sucesso!");
                                     break;
                                 case 3://Deletar
+                                    resultadoRetorno = formaPagamentoView.consultarFormaPagamento();
+                                    id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do produto para atualizar: "));
+                                    formaPagamentoView.removerFormaPagamento(id);
+                                    JOptionPane.showMessageDialog(null,"Registro removido com sucesso!");
                                     break;
                             }
                             break;
