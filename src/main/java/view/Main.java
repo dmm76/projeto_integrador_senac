@@ -12,6 +12,8 @@ public class Main {
         String[] botaoCadastro = {"Cadastrar", "Consultar", "Alterar", "Deletar", "Voltar"};
 
         FormaPagamentoView formaPagamentoView = new FormaPagamentoView();
+        CategoriaView categoriaView = new CategoriaView();
+        MarcaView marcaView = new MarcaView();
 
         int opcao = 0, opcaoEscolha, opcaoCadastro;
         do{
@@ -52,8 +54,54 @@ public class Main {
                             }
                             break;
                         case 4://Categoria
+                            opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Categoria", 0,3, null, botaoCadastro, 0);
+                            switch (opcaoCadastro){
+                                case 0://Cadastrar
+                                    categoriaView.cadastrarCategoria();
+                                    JOptionPane.showMessageDialog(null, "Registro cadastrado com sucesso");
+                                    break;
+                                case 1://Consultar
+                                    resultadoRetorno = categoriaView.consultarCategoria();
+                                    JOptionPane.showMessageDialog(null, resultadoRetorno);
+                                    break;
+                                case 2://Alterar
+                                    resultadoRetorno = categoriaView.consultarCategoria();
+                                    int id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id da categoria para atualizar: "));
+                                    categoriaView.alterarCategoria(id);
+                                    JOptionPane.showMessageDialog(null,"Registro atualizado com sucesso!");
+                                    break;
+                                case 3://Deletar
+                                    resultadoRetorno = categoriaView.consultarCategoria();
+                                    id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id da categoria para atualizar: "));
+                                    categoriaView.removerCategoria(id);
+                                    JOptionPane.showMessageDialog(null,"Registro removido com sucesso!");
+                                    break;
+                            }
                             break;
                         case 5://Marca
+                            opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Categoria", 0,3, null, botaoCadastro, 0);
+                            switch (opcaoCadastro){
+                                case 0://Cadastrar
+                                    marcaView.cadastrarMarca();
+                                    JOptionPane.showMessageDialog(null, "Registro cadastrado com sucesso");
+                                    break;
+                                case 1://Consultar
+                                    resultadoRetorno = marcaView.consultarMarca();
+                                    JOptionPane.showMessageDialog(null, resultadoRetorno);
+                                    break;
+                                case 2://Alterar
+                                    resultadoRetorno = marcaView.consultarMarca();
+                                    int id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id da categoria para atualizar: "));
+                                    marcaView.alterarMarca(id);
+                                    JOptionPane.showMessageDialog(null,"Registro atualizado com sucesso!");
+                                    break;
+                                case 3://Deletar
+                                    resultadoRetorno = marcaView.consultarMarca();
+                                    id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id da categoria para atualizar: "));
+                                    marcaView.removerMarca(id);
+                                    JOptionPane.showMessageDialog(null,"Registro removido com sucesso!");
+                                    break;
+                            }
                             break;
                     }
                     break;
