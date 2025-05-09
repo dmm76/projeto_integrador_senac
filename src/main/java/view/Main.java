@@ -19,7 +19,7 @@ public class Main {
         CategoriaView categoriaView = new CategoriaView();
         MarcaView marcaView = new MarcaView();
         PedidoView pedidoView = new PedidoView();
-        ItemPedidoView itemPedidoView = new ItemPedidoView();
+       ItemPedidoView itemPedidoView = new ItemPedidoView();
 
         int opcao = 0, opcaoEscolha, opcaoCadastro;
         do{
@@ -217,7 +217,7 @@ public class Main {
                         case 2://Alterar
                             resultadoRetorno = pedidoView.consultarPedido();
                             int id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do item pedido para atualizar: "));
-                            itemPedidoView.alterarItemPedido();
+                            itemPedidoView.alterarItemPedido(id);
                             break;
                         case 3://Deletar
                             resultadoRetorno = itemPedidoView.consultarItemPedido();

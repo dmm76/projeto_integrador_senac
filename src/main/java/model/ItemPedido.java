@@ -9,11 +9,11 @@ public class ItemPedido {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int idItemPedido;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name="idItem")
     private Item item;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name="idPedido")
     private Pedido pedido;
 
