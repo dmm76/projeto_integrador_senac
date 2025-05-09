@@ -25,7 +25,7 @@ public class ItemPedidoView {
             Item item = em.find(Item.class, idItem);
 
             if (pedido == null || item == null) {
-                JOptionPane.showMessageDialog(null, "Item ou Pedido não encontrado.");
+                JOptionPane.showMessageDialog(null, "Item Pedido não encontrado.");
                 return;
             }
 
@@ -55,7 +55,7 @@ public class ItemPedidoView {
 
         for (ItemPedido p : lista) {
             sb.append(p.getIdItemPedido()).append(" - ")
-                    .append(p.getItem().getNomeProduto()).append(" - Pedido #")
+                    .append(p.getItem().getNomeProduto()).append(" - Pedido nº: ")
                     .append(p.getPedido().getIdPedido()).append(" - ")
                     .append(p.getQuantidadeItem()).append(" - ")
                     .append(p.getValorItem()).append(" - ")

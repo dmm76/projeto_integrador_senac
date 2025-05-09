@@ -26,7 +26,7 @@ public class Main {
             opcao = JOptionPane.showOptionDialog(null, "Selecione uma opção", "CADASTRO", 0,3, null, botao, 0);
             switch (opcao){
                 case 0://Cadastro
-                    opcaoEscolha = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Produto", 0,3, null, botaoEscolha, 0);
+                    opcaoEscolha = JOptionPane.showOptionDialog(null, "Selecione uma opção", "MENU CADASTRO", 0,3, null, botaoEscolha, 0);
                     switch (opcaoEscolha){
                         case 0://Cliente
                             opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Cliente", 0,3, null, botaoCadastro, 0);
@@ -181,7 +181,7 @@ public class Main {
                     }
                     break;
                 case 1://Pedido
-                    opcaoEscolha = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Pedido", 0,3, null, botaoCadastro, 0);
+                    opcaoEscolha = JOptionPane.showOptionDialog(null, "Selecione uma opção", "PEDIDO", 0,3, null, botaoCadastro, 0);
                     switch (opcaoEscolha){
                         case 0://Cadastrar
                             pedidoView.cadastrarPedido();
@@ -204,10 +204,10 @@ public class Main {
                     }
                     break;
                 case 2://Item Pedido
-                    opcaoEscolha = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Pedido", 0,3, null, botaoCadastro, 0);
+                    opcaoEscolha = JOptionPane.showOptionDialog(null, "Selecione uma opção", "ITEM PEDIDO", 0,3, null, botaoCadastro, 0);
                     switch (opcaoEscolha){
                         case 0://Cadastrar
-                            itemView.cadastrarItem();
+                            itemPedidoView.cadastrarItemPedido();
                             JOptionPane.showMessageDialog(null, "Item pedido cadastrado com sucesso");
                             break;
                         case 1://Consultar
@@ -215,7 +215,7 @@ public class Main {
                             JOptionPane.showMessageDialog(null, resultadoRetorno);
                             break;
                         case 2://Alterar
-                            resultadoRetorno = pedidoView.consultarPedido();
+                            resultadoRetorno = itemPedidoView.consultarItemPedido();
                             int id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do item pedido para atualizar: "));
                             itemPedidoView.alterarItemPedido(id);
                             break;
