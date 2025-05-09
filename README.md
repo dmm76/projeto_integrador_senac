@@ -1,4 +1,4 @@
-# TCC - Sistema Bancário (Senac)
+# TCC - Sistema Bar e Restaurantes (Senac)
 
 Este repositório contém o projeto de Trabalho de Conclusão de Curso (TCC) desenvolvido para a professora **Claudia Tupan**, do curso de **Desenvolvimento de Sistemas - Senac**.
 
