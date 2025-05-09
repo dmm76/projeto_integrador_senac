@@ -7,7 +7,9 @@ Este repositório contém o projeto de Trabalho de Conclusão de Curso (TCC) des
 
 ## 📌 Descrição
 
-O projeto consiste em um **sistema bancário simulado**, implementado em **Java**, com as funcionalidades básicas de gerenciamento de contas, clientes e operações bancárias (como depósitos, saques e transferências).
+O projeto consiste em um **sistema para bar e restaurantes simulado**, implementado em **Java**.
+Possui as funcionalidades básicas de gerenciamento de pdv de vendas.
+Possui também funcionalidade de cadastro de clientes, produtos, fornecedores e etc).
 
 ## 🛠️ Tecnologias Utilizadas
 
