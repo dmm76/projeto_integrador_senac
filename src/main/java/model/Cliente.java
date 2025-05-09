@@ -10,18 +10,18 @@ public class Cliente {
     private int idCliente;
     private String nomeCliente;
     private String cpfCliente;
-    private String telefoneCliente;
     private String emailCliente;
+    private String telefoneCliente;
     private String enderecoCliente;
 
     public Cliente() {
     }
 
-    public Cliente(String nomeCliente, String cpfCliente, String telefoneCliente, String emailCliente, String enderecoCliente) {
+    public Cliente(String nomeCliente, String cpfCliente, String emailCliente, String telefoneCliente, String enderecoCliente) {
         this.nomeCliente = nomeCliente;
         this.cpfCliente = cpfCliente;
-        this.telefoneCliente = telefoneCliente;
         this.emailCliente = emailCliente;
+        this.telefoneCliente = telefoneCliente;
         this.enderecoCliente = enderecoCliente;
     }
 

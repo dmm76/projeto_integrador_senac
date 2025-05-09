@@ -11,6 +11,8 @@ public class Main {
         String[] botaoEscolha= {"Cliente", "Fornecedor", "ProdutoItem", "FormaPagamento", "Categoria", "Marca", "Voltar"};
         String[] botaoCadastro = {"Cadastrar", "Consultar", "Alterar", "Deletar", "Voltar"};
 
+        ClienteView clienteView = new ClienteView();
+        FornecedorView fornecedorView = new FornecedorView();
         FormaPagamentoView formaPagamentoView = new FormaPagamentoView();
         CategoriaView categoriaView = new CategoriaView();
         MarcaView marcaView = new MarcaView();
@@ -23,8 +25,54 @@ public class Main {
                     opcaoEscolha = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Produto", 0,3, null, botaoEscolha, 0);
                     switch (opcaoEscolha){
                         case 0://Cliente
+                            opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Cliente", 0,3, null, botaoCadastro, 0);
+                            switch (opcaoCadastro){
+                                case 0://Cadastrar
+                                    clienteView.cadastrarCliente();
+                                    JOptionPane.showMessageDialog(null, "Registro cadastrado com sucesso");
+                                    break;
+                                case 1://Consultar
+                                    resultadoRetorno = clienteView.consultarCliente();
+                                    JOptionPane.showMessageDialog(null, resultadoRetorno);
+                                    break;
+                                case 2://Alterar
+                                    resultadoRetorno = clienteView.consultarCliente();
+                                    int id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do cliente para atualizar: "));
+                                    clienteView.alterarCliente(id);
+                                    JOptionPane.showMessageDialog(null,"Registro atualizado com sucesso!");
+                                    break;
+                                case 3://Deletar
+                                    resultadoRetorno = clienteView.consultarCliente();
+                                    id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do cliente para atualizar: "));
+                                    clienteView.removerCliente(id);
+                                    JOptionPane.showMessageDialog(null,"Registro removido com sucesso!");
+                                    break;
+                            }
                             break;
                         case 1://Fornecedor
+                            opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Fornecedor", 0,3, null, botaoCadastro, 0);
+                            switch (opcaoCadastro){
+                                case 0://Cadastrar
+                                    fornecedorView.cadastrarFornecedor();
+                                    JOptionPane.showMessageDialog(null, "Registro cadastrado com sucesso");
+                                    break;
+                                case 1://Consultar
+                                    resultadoRetorno = fornecedorView.consultarFornecedor();
+                                    JOptionPane.showMessageDialog(null, resultadoRetorno);
+                                    break;
+                                case 2://Alterar
+                                    resultadoRetorno = fornecedorView.consultarFornecedor();
+                                    int id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do fornecedor para atualizar: "));
+                                    fornecedorView.alterarFornecedor(id);
+                                    JOptionPane.showMessageDialog(null,"Registro atualizado com sucesso!");
+                                    break;
+                                case 3://Deletar
+                                    resultadoRetorno = clienteView.consultarCliente();
+                                    id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do fornecedor para atualizar: "));
+                                    fornecedorView.removerFornecedor(id);
+                                    JOptionPane.showMessageDialog(null,"Registro removido com sucesso!");
+                                    break;
+                            }
                             break;
                         case 2://ProdutoItem
                             break;
