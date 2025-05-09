@@ -22,3 +22,7 @@ Possui também funcionalidade de cadastro de clientes, produtos, fornecedores e 
 - Git e GitHub
 
 ## 📁 Estrutura do Projeto
+
+** Diagrama de Classe Sistema BR **
+
+![Diagrama Classe](https://github.com/dmm76/tcc_senac/blob/main/src/main/java/util/images/diagrama_de_classe_sistema_br.png?raw=true)
