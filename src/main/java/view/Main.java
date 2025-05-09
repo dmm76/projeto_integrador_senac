@@ -18,12 +18,13 @@ public class Main {
         FormaPagamentoView formaPagamentoView = new FormaPagamentoView();
         CategoriaView categoriaView = new CategoriaView();
         MarcaView marcaView = new MarcaView();
+        PedidoView pedidoView = new PedidoView();
 
         int opcao = 0, opcaoEscolha, opcaoCadastro;
         do{
             opcao = JOptionPane.showOptionDialog(null, "Selecione uma opção", "CADASTRO", 0,3, null, botao, 0);
             switch (opcao){
-                case 0:
+                case 0://Cadastro
                     opcaoEscolha = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Produto", 0,3, null, botaoEscolha, 0);
                     switch (opcaoEscolha){
                         case 0://Cliente
@@ -178,7 +179,28 @@ public class Main {
                             break;
                     }
                     break;
-                case 1:
+                case 1://Pedido
+                    opcaoEscolha = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Pedido", 0,3, null, botaoCadastro, 0);
+                    switch (opcaoEscolha){
+                        case 0://Cadastrar
+                            pedidoView.cadastrarPedido();
+                            JOptionPane.showMessageDialog(null, "Pedido cadastrado com sucesso");
+                            break;
+                        case 1://Consultar
+                            resultadoRetorno = pedidoView.consultarPedido();
+                            JOptionPane.showMessageDialog(null, resultadoRetorno);
+                            break;
+                        case 2://Alterar
+                            resultadoRetorno = pedidoView.consultarPedido();
+                            int id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do pedido para atualizar: "));
+                            pedidoView.alterarPedido(id);
+                            break;
+                        case 3://Deletar
+                            resultadoRetorno = pedidoView.consultarPedido();
+                            id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do pedido para atualizar: "));
+                            pedidoView.removerPedido(id);
+                            break;
+                    }
                     break;
                 case 2:
                     JOptionPane.showMessageDialog(null, "Obrigado pela preferência!");
