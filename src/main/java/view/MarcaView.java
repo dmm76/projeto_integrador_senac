@@ -16,7 +16,7 @@ public class MarcaView {
         EntityManager em = JPAUtil.getEntityManager();
        MarcaDao marcaDao = new MarcaDao(em);
 
-        String descricao = JOptionPane.showInputDialog(null, "Digite a forma de pagamento");
+        String descricao = JOptionPane.showInputDialog(null, "Digite a marca");
 
         Marca marca = new Marca(descricao);
 
@@ -49,7 +49,7 @@ public class MarcaView {
         EntityManager em = JPAUtil.getEntityManager();
         MarcaDao marcaDao = new MarcaDao(em);
 
-        String descricao = JOptionPane.showInputDialog("Digite a descricao: ");
+        String descricao = JOptionPane.showInputDialog("Digite a marca: ");
 
         Marca marca = marcaDao.buscarPorID(id);
 

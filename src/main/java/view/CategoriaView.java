@@ -15,7 +15,7 @@ public class CategoriaView {
         EntityManager em = JPAUtil.getEntityManager();
         CategoriaDao categoriaDao = new CategoriaDao(em);
 
-        String descricao = JOptionPane.showInputDialog(null, "Digite a forma de pagamento");
+        String descricao = JOptionPane.showInputDialog(null, "Digite a categoria");
 
         Categoria categoria = new Categoria(descricao);
 
