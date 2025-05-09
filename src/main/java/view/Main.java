@@ -8,7 +8,7 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
         String resultadoRetorno = "";
-        String[] botao = {"Cadastro", "Pedido", "Encerrar"};
+        String[] botao = {"Cadastro", "Pedido", "Itens Pedidos", "Encerrar"};
         String[] botaoEscolha= {"Cliente", "Fornecedor", "ProdutoItem", "FormaPagamento", "Categoria", "Marca", "Voltar"};
         String[] botaoCadastro = {"Cadastrar", "Consultar", "Alterar", "Deletar", "Voltar"};
 
@@ -19,6 +19,7 @@ public class Main {
         CategoriaView categoriaView = new CategoriaView();
         MarcaView marcaView = new MarcaView();
         PedidoView pedidoView = new PedidoView();
+        ItemPedidoView itemPedidoView = new ItemPedidoView();
 
         int opcao = 0, opcaoEscolha, opcaoCadastro;
         do{
@@ -202,10 +203,33 @@ public class Main {
                             break;
                     }
                     break;
-                case 2:
+                case 2://Item Pedido
+                    opcaoEscolha = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Pedido", 0,3, null, botaoCadastro, 0);
+                    switch (opcaoEscolha){
+                        case 0://Cadastrar
+                            itemView.cadastrarItem();
+                            JOptionPane.showMessageDialog(null, "Item pedido cadastrado com sucesso");
+                            break;
+                        case 1://Consultar
+                            resultadoRetorno = itemPedidoView.consultarItemPedido();
+                            JOptionPane.showMessageDialog(null, resultadoRetorno);
+                            break;
+                        case 2://Alterar
+                            resultadoRetorno = pedidoView.consultarPedido();
+                            int id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do item pedido para atualizar: "));
+                            itemPedidoView.alterarItemPedido();
+                            break;
+                        case 3://Deletar
+                            resultadoRetorno = itemPedidoView.consultarItemPedido();
+                            id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do item pedido para atualizar: "));
+                            itemPedidoView.removerPedido(id);
+                            break;
+                    }
+                    break;
+                case 3:
                     JOptionPane.showMessageDialog(null, "Obrigado pela preferência!");
                     break;
             }
-        }while(opcao !=2);
+        }while(opcao !=3);
     }
 }
