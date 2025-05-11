@@ -26,7 +26,7 @@ CREATE TABLE `marca` (
   `idMarca` int NOT NULL AUTO_INCREMENT,
   `descricao` varchar(50) NOT NULL,
   PRIMARY KEY (`idMarca`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,6 +35,7 @@ CREATE TABLE `marca` (
 
 LOCK TABLES `marca` WRITE;
 /*!40000 ALTER TABLE `marca` DISABLE KEYS */;
+INSERT INTO `marca` VALUES (1,'Absolut'),(2,'Amstel'),(3,'Brahma'),(4,'Budweiser'),(5,'Coca-Cola'),(6,'Eisenbahn'),(7,'Fanta'),(8,'Heineken'),(9,'Jack Daniel\'s'),(10,'Johnnie Walker'),(11,'Pepsi'),(12,'Red Bull');
 /*!40000 ALTER TABLE `marca` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -47,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-10 14:05:00
+-- Dump completed on 2025-05-10 21:32:06

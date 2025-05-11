@@ -33,7 +33,8 @@ CREATE TABLE `pedido` (
   KEY `fk_pedido_formaPagamento_idx` (`idFormaPagamento`),
   KEY `fk_pedido_cliente_idx` (`idCliente`),
   CONSTRAINT `fk_pedido_cliente` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`),
-  CONSTRAINT `fk_pedido_formaPagamento` FOREIGN KEY (`idFormaPagamento`) REFERENCES `formapagmanto` (`idFormaPagmanto`)
+  CONSTRAINT `fk_pedido_formaPagamento` FOREIGN KEY (`idFormaPagamento`) REFERENCES `formapagamento` (`idFormaPagamento`),
+  CONSTRAINT `FKt2i2v4mwu653axsa5i0k1lbg4` FOREIGN KEY (`idFormaPagamento`) REFERENCES `formapagamento` (`idFormaPagamento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -55,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-10 14:04:59
+-- Dump completed on 2025-05-10 21:32:07

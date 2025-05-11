@@ -26,7 +26,7 @@ CREATE TABLE `categoria` (
   `idCategoria` int NOT NULL AUTO_INCREMENT,
   `descricao` varchar(45) NOT NULL,
   PRIMARY KEY (`idCategoria`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,6 +35,7 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
+INSERT INTO `categoria` VALUES (1,'Águas'),(2,'Cafés'),(3,'Cervejas'),(4,'Chás'),(5,'Coquetéis'),(6,'Destilados'),(7,'Energéticos'),(8,'Licores'),(9,'Petiscos'),(10,'Pratos Principais'),(11,'Refrigerantes'),(12,'Sanduíches'),(13,'Sobremesas'),(14,'Sucos'),(15,'Vinhos');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -47,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-10 14:05:00
+-- Dump completed on 2025-05-10 21:32:06
