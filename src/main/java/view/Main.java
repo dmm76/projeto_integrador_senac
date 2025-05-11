@@ -32,8 +32,9 @@ public class Main {
                             opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Cliente", 0,3, null, botaoCadastro, 0);
                             switch (opcaoCadastro){
                                 case 0://Cadastrar
-                                    clienteView.cadastrarCliente();
-                                    JOptionPane.showMessageDialog(null, "Registro cadastrado com sucesso");
+                                    if (clienteView.cadastrarCliente()) {
+                                        JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
+                                    }
                                     break;
                                 case 1://Consultar
                                     resultadoRetorno = clienteView.consultarCliente();
@@ -41,15 +42,27 @@ public class Main {
                                     break;
                                 case 2://Alterar
                                     resultadoRetorno = clienteView.consultarCliente();
-                                    int id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do cliente para atualizar: "));
-                                    clienteView.alterarCliente(id);
-                                    JOptionPane.showMessageDialog(null,"Registro atualizado com sucesso!");
+                                    String inputAlt = JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o ID do cliente para atualizar:");
+                                    if (inputAlt == null || inputAlt.trim().isEmpty()) {
+                                        JOptionPane.showMessageDialog(null, "Operação cancelada.");
+                                        break;
+                                    }
+                                    int idAlt = Integer.parseInt(inputAlt);
+                                    if (clienteView.alterarCliente(idAlt)) {
+                                        JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso!");
+                                    }
                                     break;
                                 case 3://Deletar
                                     resultadoRetorno = clienteView.consultarCliente();
-                                    id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do cliente para atualizar: "));
-                                    clienteView.removerCliente(id);
-                                    JOptionPane.showMessageDialog(null,"Registro removido com sucesso!");
+                                    String inputDel = JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o ID do cliente para remover:");
+                                    if (inputDel == null || inputDel.trim().isEmpty()) {
+                                        JOptionPane.showMessageDialog(null, "Operação cancelada.");
+                                        break;
+                                    }
+                                    int idDel = Integer.parseInt(inputDel);
+                                    if (clienteView.removerCliente(idDel)) {
+                                        JOptionPane.showMessageDialog(null, "Cliente removido com sucesso!");
+                                    }
                                     break;
                             }
                             break;
@@ -57,8 +70,9 @@ public class Main {
                             opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Fornecedor", 0,3, null, botaoCadastro, 0);
                             switch (opcaoCadastro){
                                 case 0://Cadastrar
-                                    fornecedorView.cadastrarFornecedor();
-                                    JOptionPane.showMessageDialog(null, "Registro cadastrado com sucesso");
+                                    if (fornecedorView.cadastrarFornecedor()) {
+                                        JOptionPane.showMessageDialog(null, "Fornecedor cadastrado com sucesso!");
+                                    }
                                     break;
                                 case 1://Consultar
                                     resultadoRetorno = fornecedorView.consultarFornecedor();
@@ -66,15 +80,27 @@ public class Main {
                                     break;
                                 case 2://Alterar
                                     resultadoRetorno = fornecedorView.consultarFornecedor();
-                                    int id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do fornecedor para atualizar: "));
-                                    fornecedorView.alterarFornecedor(id);
-                                    JOptionPane.showMessageDialog(null,"Registro atualizado com sucesso!");
+                                    String inputAlt = JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o ID do fornecedor para atualizar:");
+                                    if (inputAlt == null || inputAlt.trim().isEmpty()) {
+                                        JOptionPane.showMessageDialog(null, "Operação cancelada.");
+                                        break;
+                                    }
+                                    int idAlt = Integer.parseInt(inputAlt);
+                                    if (fornecedorView.alterarFornecedor(idAlt)) {
+                                        JOptionPane.showMessageDialog(null, "Fornecedor atualizado com sucesso!");
+                                    }
                                     break;
                                 case 3://Deletar
                                     resultadoRetorno = fornecedorView.consultarFornecedor();
-                                    id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do fornecedor para atualizar: "));
-                                    fornecedorView.removerFornecedor(id);
-                                    JOptionPane.showMessageDialog(null,"Registro removido com sucesso!");
+                                    String inputDel = JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o ID do fornecedor para remover:");
+                                    if (inputDel == null || inputDel.trim().isEmpty()) {
+                                        JOptionPane.showMessageDialog(null, "Operação cancelada.");
+                                        break;
+                                    }
+                                    int idDel = Integer.parseInt(inputDel);
+                                    if (fornecedorView.removerFornecedor(idDel)) {
+                                        JOptionPane.showMessageDialog(null, "Fornecedor removido com sucesso!");
+                                    }
                                     break;
                             }
                             break;
@@ -82,8 +108,9 @@ public class Main {
                             opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Item", 0,3, null, botaoCadastro, 0);
                             switch (opcaoCadastro){
                                 case 0://Cadastrar
-                                    itemView.cadastrarItem();
-                                    JOptionPane.showMessageDialog(null, "Registro cadastrado com sucesso");
+                                    if (itemView.cadastrarItem()) {
+                                        JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+                                    }
                                     break;
                                 case 1://Consultar
                                     resultadoRetorno = itemView.consultarItens();
@@ -91,15 +118,27 @@ public class Main {
                                     break;
                                 case 2://Alterar
                                     resultadoRetorno = itemView.consultarItens();
-                                    int id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do item para atualizar: "));
-                                    itemView.alterarItem(id);
-                                    JOptionPane.showMessageDialog(null,"Registro atualizado com sucesso!");
+                                    String inputAlt = JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o ID do produto para atualizar:");
+                                    if (inputAlt == null || inputAlt.trim().isEmpty()) {
+                                        JOptionPane.showMessageDialog(null, "Operação cancelada.");
+                                        break;
+                                    }
+                                    int idAlt = Integer.parseInt(inputAlt);
+                                    if (itemView.alterarItem(idAlt)) {
+                                        JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso!");
+                                    }
                                     break;
                                 case 3://Deletar
                                     resultadoRetorno = itemView.consultarItens();
-                                    id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do item para atualizar: "));
-                                    itemView.removerItem(id);
-                                    JOptionPane.showMessageDialog(null,"Registro removido com sucesso!");
+                                    String inputDel = JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o ID do produto para remover:");
+                                    if (inputDel == null || inputDel.trim().isEmpty()) {
+                                        JOptionPane.showMessageDialog(null, "Operação cancelada.");
+                                        break;
+                                    }
+                                    int idDel = Integer.parseInt(inputDel);
+                                    if (itemView.removerItem(idDel)) {
+                                        JOptionPane.showMessageDialog(null, "Produto removido com sucesso!");
+                                    }
                                     break;
                             }
                             break;
@@ -107,8 +146,9 @@ public class Main {
                             opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Forma de Pagamento", 0,3, null, botaoCadastro, 0);
                             switch (opcaoCadastro){
                                 case 0://Cadastrar
-                                    formaPagamentoView.cadastrarFormaPagamento();
-                                    JOptionPane.showMessageDialog(null, "Registro cadastrado com sucesso");
+                                    if (formaPagamentoView.cadastrarFormaPagamento()) {
+                                        JOptionPane.showMessageDialog(null, "Forma de pagamento cadastrada com sucesso!");
+                                    }
                                     break;
                                 case 1://Consultar
                                     resultadoRetorno = formaPagamentoView.consultarFormaPagamento();
@@ -116,15 +156,27 @@ public class Main {
                                     break;
                                 case 2://Alterar
                                     resultadoRetorno = formaPagamentoView.consultarFormaPagamento();
-                                    int id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do produto para atualizar: "));
-                                    formaPagamentoView.alterarFormaPagamento(id);
-                                    JOptionPane.showMessageDialog(null,"Registro atualizado com sucesso!");
+                                    String inputAlt = JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o ID da forma de pagamento para atualizar:");
+                                    if (inputAlt == null || inputAlt.trim().isEmpty()) {
+                                        JOptionPane.showMessageDialog(null, "Operação cancelada.");
+                                        break;
+                                    }
+                                    int id = Integer.parseInt(inputAlt);
+                                    if (formaPagamentoView.alterarFormaPagamento(id)) {
+                                        JOptionPane.showMessageDialog(null, "Forma de pagamento atualizada com sucesso!");
+                                    }
                                     break;
                                 case 3://Deletar
                                     resultadoRetorno = formaPagamentoView.consultarFormaPagamento();
-                                    id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do produto para atualizar: "));
-                                    formaPagamentoView.removerFormaPagamento(id);
-                                    JOptionPane.showMessageDialog(null,"Registro removido com sucesso!");
+                                    String inputDel = JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o ID da forma de pagamento para remover:");
+                                    if (inputDel == null || inputDel.trim().isEmpty()) {
+                                        JOptionPane.showMessageDialog(null, "Operação cancelada.");
+                                        break;
+                                    }
+                                    id = Integer.parseInt(inputDel);
+                                    if (formaPagamentoView.removerFormaPagamento(id)) {
+                                        JOptionPane.showMessageDialog(null, "Forma de pagamento removida com sucesso!");
+                                    }
                                     break;
                             }
                             break;

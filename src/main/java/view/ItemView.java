@@ -13,17 +13,42 @@ import java.util.List;
 
 public class ItemView {
 
-    public void cadastrarItem() {
+    public boolean cadastrarItem() {
         EntityManager em = JPAUtil.getEntityManager();
         ItemDao itemDao = new ItemDao(em);
 
         try {
             String nome = JOptionPane.showInputDialog("Digite o nome do produto:");
+            if (nome == null || nome.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
+                return false;
+            }
             String descricao = JOptionPane.showInputDialog("Digite a descrição do produto:");
-            double valor = Double.parseDouble(JOptionPane.showInputDialog("Digite o valor unitário:"));
+            if (descricao == null || descricao.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
+                return false;
+            }
+            String inputValor = JOptionPane.showInputDialog("Digite o valor unitário:");
+            if (inputValor == null || inputValor.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
+                return false;
+            }
 
+            double valor = Double.parseDouble(inputValor);
+
+            // Mostra as marcas disponíveis
+            MarcaView marcaView = new MarcaView();
+            JOptionPane.showMessageDialog(null, marcaView.consultarMarca());
             int idMarca = Integer.parseInt(JOptionPane.showInputDialog("Digite o ID da marca:"));
+
+            // Mostra as categorias disponíveis
+            CategoriaView categoriaView = new CategoriaView();
+            JOptionPane.showMessageDialog(null, categoriaView.consultarCategoria());
             int idCategoria = Integer.parseInt(JOptionPane.showInputDialog("Digite o ID da categoria:"));
+
+            // Mostra os fornecedores disponíveis
+            FornecedorView fornecedorView = new FornecedorView();
+            JOptionPane.showMessageDialog(null, fornecedorView.consultarFornecedor());
             int idFornecedor = Integer.parseInt(JOptionPane.showInputDialog("Digite o ID do fornecedor:"));
 
             Marca marca = em.find(Marca.class, idMarca);
@@ -32,19 +57,18 @@ public class ItemView {
 
             if (marca == null || categoria == null || fornecedor == null) {
                 JOptionPane.showMessageDialog(null, "Marca, categoria ou fornecedor não encontrados.");
-                return;
+                return false;
             }
 
             Item item = new Item(nome, descricao, valor, marca, categoria, fornecedor);
-
             em.getTransaction().begin();
             itemDao.cadastrar(item);
             em.getTransaction().commit();
-
-            JOptionPane.showMessageDialog(null, "Item cadastrado com sucesso!");
+            return true;
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar item: " + e.getMessage());
+            return false;
         } finally {
             em.close();
         }
@@ -55,8 +79,12 @@ public class ItemView {
         ItemDao itemDao = new ItemDao(em);
 
         List<Item> lista = itemDao.listarTodos();
-        StringBuilder sb = new StringBuilder("ID - Nome - Valor - Marca - Categoria - Fornecedor\n");
+        if (lista.isEmpty()) {
+            em.close();
+            return "Nenhum item cadastrado.";
+        }
 
+        StringBuilder sb = new StringBuilder("ID - Nome - Valor - Marca - Categoria - Fornecedor\n");
         for (Item item : lista) {
             sb.append(item.getIdItem()).append(" - ")
                     .append(item.getNomeProduto()).append(" - ")
@@ -70,23 +98,47 @@ public class ItemView {
         return sb.toString();
     }
 
-    public void alterarItem(int id) {
+    public boolean alterarItem(int id) {
         EntityManager em = JPAUtil.getEntityManager();
         ItemDao itemDao = new ItemDao(em);
 
         Item item = itemDao.buscarPorId(id);
         if (item == null) {
             JOptionPane.showMessageDialog(null, "Item não encontrado!");
-            return;
+            return false;
         }
 
         try {
             String nome = JOptionPane.showInputDialog("Novo nome:", item.getNomeProduto());
-            String descricao = JOptionPane.showInputDialog("Nova descrição:", item.getDescricaoProduto());
-            double valor = Double.parseDouble(JOptionPane.showInputDialog("Novo valor:", item.getValorUnitarioProduto()));
+            if (nome == null || nome.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Alteração cancelada.");
+                em.close();
+                return false;
+            }
 
+            String descricao = JOptionPane.showInputDialog("Nova descrição:", item.getDescricaoProduto());
+            if (descricao == null || descricao.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Alteração cancelada.");
+                em.close();
+                return false;
+            }
+
+            String valorStr = JOptionPane.showInputDialog("Novo valor:", item.getValorUnitarioProduto());
+            if (valorStr == null || valorStr.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Alteração cancelada.");
+                em.close();
+                return false;
+            }
+            double valor = Double.parseDouble(valorStr);
+
+            MarcaView marcaView = new MarcaView();
+            JOptionPane.showMessageDialog(null, marcaView.consultarMarca());
             int idMarca = Integer.parseInt(JOptionPane.showInputDialog("Novo ID da marca:", item.getMarca().getIdMarca()));
+            CategoriaView categoriaView = new CategoriaView();
+            JOptionPane.showMessageDialog(null, categoriaView.consultarCategoria());
             int idCategoria = Integer.parseInt(JOptionPane.showInputDialog("Novo ID da categoria:", item.getCategoria().getIdCategoria()));
+            FornecedorView fornecedorView = new FornecedorView();
+            JOptionPane.showMessageDialog(null, fornecedorView.consultarFornecedor());
             int idFornecedor = Integer.parseInt(JOptionPane.showInputDialog("Novo ID do fornecedor:", item.getFornecedor().getIdFornecedor()));
 
             Marca marca = em.find(Marca.class, idMarca);
@@ -102,23 +154,25 @@ public class ItemView {
             item.setFornecedor(fornecedor);
             em.getTransaction().commit();
 
-            JOptionPane.showMessageDialog(null, "Item atualizado com sucesso!");
+            return true;
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar item: " + e.getMessage());
+            return false;
         } finally {
             em.close();
         }
     }
 
-    public void removerItem(int id) {
+    public boolean removerItem(int id) {
         EntityManager em = JPAUtil.getEntityManager();
         ItemDao itemDao = new ItemDao(em);
 
         Item item = itemDao.buscarPorId(id);
         if (item == null) {
             JOptionPane.showMessageDialog(null, "Item não encontrado!");
-            return;
+            em.close();
+            return false;
         }
 
         em.getTransaction().begin();
@@ -126,6 +180,6 @@ public class ItemView {
         em.getTransaction().commit();
         em.close();
 
-        JOptionPane.showMessageDialog(null, "Item removido com sucesso!");
+        return true;
     }
 }

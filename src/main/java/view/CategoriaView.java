@@ -62,7 +62,7 @@ public class CategoriaView {
             return false;
         }
 
-        String novaDescricao = JOptionPane.showInputDialog("Digite a nova descricao da categoria: ");
+        String novaDescricao = JOptionPane.showInputDialog("Digite a nova descricao da categoria: ", categoria.getDescricao());
         if (novaDescricao == null || novaDescricao.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Alteração cancelada.");
             em.close();
