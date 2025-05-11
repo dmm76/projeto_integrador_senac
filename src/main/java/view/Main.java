@@ -132,8 +132,9 @@ public class Main {
                             opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Categoria", 0,3, null, botaoCadastro, 0);
                             switch (opcaoCadastro){
                                 case 0://Cadastrar
-                                    categoriaView.cadastrarCategoria();
-                                    JOptionPane.showMessageDialog(null, "Registro cadastrado com sucesso");
+                                    if (categoriaView.cadastrarCategoria()) {
+                                        JOptionPane.showMessageDialog(null, "Categoria cadastrada com sucesso!");
+                                    }
                                     break;
                                 case 1://Consultar
                                     resultadoRetorno = categoriaView.consultarCategoria();
@@ -141,15 +142,22 @@ public class Main {
                                     break;
                                 case 2://Alterar
                                     resultadoRetorno = categoriaView.consultarCategoria();
-                                    int id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id da categoria para atualizar: "));
-                                    categoriaView.alterarCategoria(id);
-                                    JOptionPane.showMessageDialog(null,"Registro atualizado com sucesso!");
+                                    String input = JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id da categoria para atualizar:");
+                                    if (input == null || input.trim().isEmpty()) {
+                                        JOptionPane.showMessageDialog(null, "Operação cancelada.");
+                                        break;
+                                    }
+                                    int id = Integer.parseInt(input);
+                                    if (categoriaView.alterarCategoria(id)) {
+                                        JOptionPane.showMessageDialog(null, "Categoria atualizada com sucesso!");
+                                    }
                                     break;
                                 case 3://Deletar
                                     resultadoRetorno = categoriaView.consultarCategoria();
                                     id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id da categoria para atualizar: "));
-                                    categoriaView.removerCategoria(id);
-                                    JOptionPane.showMessageDialog(null,"Registro removido com sucesso!");
+                                    if (categoriaView.removerCategoria(id)) {
+                                        JOptionPane.showMessageDialog(null, "Categoria removida com sucesso!");
+                                    }
                                     break;
                             }
                             break;
@@ -157,8 +165,9 @@ public class Main {
                             opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Marca", 0,3, null, botaoCadastro, 0);
                             switch (opcaoCadastro){
                                 case 0://Cadastrar
-                                    marcaView.cadastrarMarca();
-                                    JOptionPane.showMessageDialog(null, "Registro cadastrado com sucesso");
+                                    if (marcaView.cadastrarMarca()) {
+                                        JOptionPane.showMessageDialog(null, "Marca cadastrada com sucesso!");
+                                    }
                                     break;
                                 case 1://Consultar
                                     resultadoRetorno = marcaView.consultarMarca();
@@ -167,14 +176,16 @@ public class Main {
                                 case 2://Alterar
                                     resultadoRetorno = marcaView.consultarMarca();
                                     int id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id da marca para atualizar: "));
-                                    marcaView.alterarMarca(id);
-                                    JOptionPane.showMessageDialog(null,"Registro atualizado com sucesso!");
+                                    if (marcaView.alterarMarca(id)) {
+                                        JOptionPane.showMessageDialog(null, "Marca atualizada com sucesso!");
+                                    }
                                     break;
                                 case 3://Deletar
                                     resultadoRetorno = marcaView.consultarMarca();
                                     id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id da marca para deletar: "));
-                                    marcaView.removerMarca(id);
-                                    JOptionPane.showMessageDialog(null,"Marca removida com sucesso!");
+                                    if (marcaView.removerMarca(id)) {
+                                        JOptionPane.showMessageDialog(null, "Marca removida com sucesso!");
+                                    }
                                     break;
                             }
                             break;

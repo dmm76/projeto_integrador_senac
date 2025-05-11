@@ -11,7 +11,8 @@ import javax.swing.*;
 import java.util.List;
 
 public class MarcaView {
-    public void cadastrarMarca(){
+
+    public boolean cadastrarMarca(){
         //conexao com o banco
         EntityManager em = JPAUtil.getEntityManager();
        MarcaDao marcaDao = new MarcaDao(em);
@@ -20,7 +21,7 @@ public class MarcaView {
         if (descricao == null || descricao.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
             em.close();
-            return;
+            return false;
         }
 
         Marca marca = new Marca(descricao);
@@ -28,24 +29,34 @@ public class MarcaView {
         marcaDao.cadastrar(marca);
         em.getTransaction().commit();
         em.close();
+        return true;
     }
+
     public String consultarMarca(){
         //conexao com o banco
         EntityManager em = JPAUtil.getEntityManager();
-
         MarcaDao marcaDao = new MarcaDao(em);
+        String resultado = "";
 
         List<Marca> todosRegistros = marcaDao.buscarTodos();
-        int totalRegistros = todosRegistros.size();
 
-        String resultado = "ID - DESCRICAO\n";
-        for(int i=0; i < totalRegistros; i++){
-            resultado += todosRegistros.get(i).getIdMarca() + " - " +
-                    todosRegistros.get(i).getDescricao() + "\n";
+        if (todosRegistros.isEmpty()) {
+            em.close();
+            return "Nenhuma marca cadastrada.";
+        }else{
+            int totalRegistros = todosRegistros.size();
+
+            resultado = "ID - DESCRICAO\n";
+            for(int i=0; i < totalRegistros; i++){
+                resultado += todosRegistros.get(i).getIdMarca() + " - " +
+                        todosRegistros.get(i).getDescricao() + "\n";
+            }
         }
+        em.close();
         return resultado;
     }
-    public void alterarMarca(int id){
+
+    public boolean alterarMarca(int id){
         //conexao com o banco
         EntityManager em = JPAUtil.getEntityManager();
         MarcaDao marcaDao = new MarcaDao(em);
@@ -54,22 +65,24 @@ public class MarcaView {
         if (descricao == null || descricao.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
             em.close();
-            return;
+            return false;
         }
 
         Marca marca = marcaDao.buscarPorID(id);
         if (marca == null) {
             JOptionPane.showMessageDialog(null, "Marca não encontrada.");
             em.close();
-            return;
+            return false;
         }
 
         em.getTransaction().begin();
         marca.setDescricao(descricao);
         em.getTransaction().commit();
         em.close();
+        return true;
     }
-    public void removerMarca(int id){
+
+    public boolean removerMarca(int id){
         //conexao com o banco
         EntityManager em = JPAUtil.getEntityManager();
         MarcaDao marcaDao = new MarcaDao(em);
@@ -78,12 +91,13 @@ public class MarcaView {
         if (marca == null) {
             JOptionPane.showMessageDialog(null, "Marca não encontrada.");
             em.close();
-            return;
+            return false;
         }
 
         em.getTransaction().begin();
         em.remove(marca);
         em.getTransaction().commit();
         em.close();
+        return true;
     }
 }
