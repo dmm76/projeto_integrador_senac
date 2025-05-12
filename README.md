@@ -43,8 +43,8 @@ Para proteger as informações sensíveis (usuário e senha do banco de dados), 
 ### 📌 Como configurar
 
 1. **Crie um arquivo `.env` na raiz do projeto** com o seguinte conteúdo:
-2. **Crie a classe EnvLoader
-3. **Modifique a classe JPAUtil removendo as linha que fazem o link com o banco de dados
+2. **Crie a classe EnvLoader**
+3. **Modifique a classe JPAUtil** removendo as linha que fazem o link com o banco de dados
 ```env
 DB_USER=root
 DB_PASSWORD=suaSenhaAqui
