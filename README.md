@@ -35,3 +35,24 @@ Possui também funcionalidade de cadastro de clientes, produtos, fornecedores e 
 ** Diagrama de Classe Sistema BR **
 
 ![Diagrama Classe](https://github.com/dmm76/tcc_senac/blob/main/src/main/java/util/images/diagrama_de_classe_sistema_br.png?raw=true)
+
+## 🔒 Segurança de Credenciais com `.env`
+
+Para proteger as informações sensíveis (usuário e senha do banco de dados), este projeto utiliza variáveis de ambiente via arquivo `.env`, que **não é incluído no controle de versão (GitHub)**.
+
+### 📌 Como configurar
+
+1. **Crie um arquivo `.env` na raiz do projeto** com o seguinte conteúdo:
+2. **Crie a classe EnvLoader
+3. **Modifique a classe JPAUtil removendo as linha que fazem o link com o banco de dados
+```env
+DB_USER=root
+DB_PASSWORD=suaSenhaAqui
+
+✅ Benefícios
+
+    Maior segurança (nenhuma senha fica exposta no projeto)
+
+    Maior portabilidade (fácil troca de credenciais entre ambientes)
+
+    Evita vazamentos acidentais no GitHub ou versionamento
