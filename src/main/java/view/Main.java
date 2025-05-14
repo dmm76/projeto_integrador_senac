@@ -247,17 +247,20 @@ public class Main {
                     opcaoEscolha = JOptionPane.showOptionDialog(null, "Selecione uma opção", "PEDIDO", 0,3, null, botaoCadastro, 0);
                     switch (opcaoEscolha){
                         case 0://Cadastrar
-                            pedidoView.cadastrarPedido();
-                            int resposta = JOptionPane.showConfirmDialog(
-                                    null,
-                                    "Deseja adicionar itens a este pedido agora?",
-                                    "Adicionar Itens",
-                                    JOptionPane.YES_NO_OPTION
-                            );
-                            if (resposta == JOptionPane.YES_OPTION) {
-                                itemPedidoView.cadastrarItemPedido();
+                            if (pedidoView.cadastrarPedido()) {
+                                int resposta = JOptionPane.showConfirmDialog(null,
+                                        "Deseja adicionar itens a este pedido agora?",
+                                        "Adicionar Itens",
+                                        JOptionPane.YES_NO_OPTION);
+                                if (resposta == JOptionPane.YES_OPTION) {
+                                    if (itemPedidoView.cadastrarItemPedido()) {
+                                        JOptionPane.showMessageDialog(null, "Item Pedido cadastrado com sucesso");
+                                    }
+                                } else if(resposta == JOptionPane.NO_OPTION){
+                                    JOptionPane.showMessageDialog(null, "Item Pedido cancelado");
+                                }
+                                JOptionPane.showMessageDialog(null, "Pedido registrado com sucesso!");
                             }
-                            JOptionPane.showMessageDialog(null, "Pedido cadastrado com sucesso");
                             break;
                         case 1://Consultar
                             resultadoRetorno = pedidoView.consultarPedido();
@@ -265,8 +268,17 @@ public class Main {
                             break;
                         case 2://Alterar
                             resultadoRetorno = pedidoView.consultarPedido();
-                            int id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do pedido para atualizar: "));
-                            pedidoView.alterarPedido(id);
+                            String inputId = JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do pedido para atualizar:");
+                            if (inputId == null || inputId.trim().isEmpty()) {
+                                JOptionPane.showMessageDialog(null, "Operação cancelada.");
+                                break;
+                            }
+
+                            int id = Integer.parseInt(inputId);
+                            if (pedidoView.alterarPedido(id)) {
+                                JOptionPane.showMessageDialog(null, "Pedido atualizado com sucesso!");
+
+                            }
                             break;
                         case 3://Deletar
                             resultadoRetorno = pedidoView.consultarPedido();
@@ -279,8 +291,9 @@ public class Main {
                     opcaoEscolha = JOptionPane.showOptionDialog(null, "Selecione uma opção", "ITEM PEDIDO", 0,3, null, botaoCadastro, 0);
                     switch (opcaoEscolha){
                         case 0://Cadastrar
-                            itemPedidoView.cadastrarItemPedido();
-                            JOptionPane.showMessageDialog(null, "Item pedido cadastrado com sucesso");
+                            if (itemPedidoView.cadastrarItemPedido()) {
+                                JOptionPane.showMessageDialog(null, "Item pedido cadastrado com sucesso");
+                            }
                             break;
                         case 1://Consultar
                             resultadoRetorno = itemPedidoView.consultarItemPedido();
@@ -288,13 +301,20 @@ public class Main {
                             break;
                         case 2://Alterar
                             resultadoRetorno = itemPedidoView.consultarItemPedido();
-                            int id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do item pedido para atualizar: "));
-                            itemPedidoView.alterarItemPedido(id);
+                            String inputId = JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do item pedido para atualizar:");
+                            if (inputId == null || inputId.trim().isEmpty()) {
+                                JOptionPane.showMessageDialog(null, "Operação cancelada.");
+                                break;
+                            }
+                            int id = Integer.parseInt(inputId);
+                            if (itemPedidoView.alterarItemPedido(id)) {
+                                JOptionPane.showMessageDialog(null, "Pedido atualizado com sucesso!");
+                            }
                             break;
                         case 3://Deletar
                             resultadoRetorno = itemPedidoView.consultarItemPedido();
                             id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do item pedido para atualizar: "));
-                            itemPedidoView.removerPedido(id);
+                            itemPedidoView.removerItemPedido(id);
                             break;
                     }
                     break;

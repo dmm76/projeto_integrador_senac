@@ -19,17 +19,18 @@ public class ItemPedido {
 
     private int quantidadeItem;
     private double valorItem;
+    @Column(insertable = false, updatable = false)
     private double valorTotalItem;
 
     public ItemPedido() {
     }
 
-    public ItemPedido(Item item, Pedido pedido, int quantidadeItem, double valorItem, double valorTotalItem) {
+    public ItemPedido(Item item, Pedido pedido, int quantidadeItem, double valorItem) {
         this.item = item;
         this.pedido = pedido;
         this.quantidadeItem = quantidadeItem;
         this.valorItem = valorItem;
-        this.valorTotalItem = valorTotalItem;
+        //this.valorTotalItem = valorTotalItem;
     }
 
     public int getIdItemPedido() {

@@ -28,12 +28,12 @@ public class ItemView {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
                 return false;
             }
+
             String inputValor = JOptionPane.showInputDialog("Digite o valor unitário:");
             if (inputValor == null || inputValor.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
                 return false;
             }
-
             double valor = Double.parseDouble(inputValor);
 
             // Mostra as marcas disponíveis
@@ -87,8 +87,8 @@ public class ItemView {
         StringBuilder sb = new StringBuilder("ID - Nome - Valor - Marca - Categoria - Fornecedor\n");
         for (Item item : lista) {
             sb.append(item.getIdItem()).append(" - ")
-                    .append(item.getNomeProduto()).append(" - ")
-                    .append(item.getValorUnitarioProduto()).append(" - ")
+                    .append(item.getNomeProduto()).append(" - R$ ")
+                    .append(String.format("%.2f", item.getValorUnitarioProduto())).append(" - ")
                     .append(item.getMarca().getDescricao()).append(" - ")
                     .append(item.getCategoria().getDescricao()).append(" - ")
                     .append(item.getFornecedor().getNomeFornecedor()).append("\n");
