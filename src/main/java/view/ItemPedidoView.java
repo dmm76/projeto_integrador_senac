@@ -14,16 +14,20 @@ public class ItemPedidoView {
         EntityManager em = JPAUtil.getEntityManager();
         ItemPedidoDao itemPedidoDao = new ItemPedidoDao(em);
 
+        String resultado = null;
         try {
-
-            String idItemStr = JOptionPane.showInputDialog("Digite o ID do Item: ");
+            ItemView itemView = new ItemView();
+            resultado = itemView.consultarItens();
+            String idItemStr = JOptionPane.showInputDialog(null, resultado, "Digite o ID do Item: ");
             if (idItemStr == null || idItemStr.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
                 return false;
             }
             int idItem = Integer.parseInt(idItemStr);
 
-            String idPedidoStr = JOptionPane.showInputDialog("Digite o ID do Pedido: ");
+            PedidoView pedidoView = new PedidoView();
+            resultado = pedidoView.consultarPedido();
+            String idPedidoStr = JOptionPane.showInputDialog(null, resultado, "Digite o ID do Pedido: ");
             if (idPedidoStr == null || idPedidoStr.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
                 return false;

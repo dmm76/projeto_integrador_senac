@@ -37,8 +37,9 @@ public class PedidoView {
             }
 
             FormaPagamentoView formaPagamentoView = new FormaPagamentoView();
-            JOptionPane.showMessageDialog(null, formaPagamentoView.consultarFormaPagamento());
-            String idFormaStr = JOptionPane.showInputDialog(null, "Digite o ID da Forma de Pagamento:");
+            String resultado = formaPagamentoView.consultarFormaPagamento();
+            //JOptionPane.showMessageDialog(null, formaPagamentoView.consultarFormaPagamento());
+            String idFormaStr = JOptionPane.showInputDialog(null, resultado,"Digite o ID da Forma de Pagamento:");
             if (idFormaStr == null || idFormaStr.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
                 return false;
@@ -46,8 +47,9 @@ public class PedidoView {
             int idFormaPagamento = Integer.parseInt(idFormaStr);
 
             ClienteView clienteView = new ClienteView();
-            JOptionPane.showMessageDialog(null, clienteView.consultarCliente());
-            String idClienteSrt = JOptionPane.showInputDialog(null, "Digite o ID do Cliente: ");
+            resultado = clienteView.consultarCliente();
+           // JOptionPane.showMessageDialog(null, clienteView.consultarCliente());
+            String idClienteSrt = JOptionPane.showInputDialog(null, resultado,"Digite o ID do Cliente: ");
             if (idClienteSrt == null || idClienteSrt.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
                 return false;
