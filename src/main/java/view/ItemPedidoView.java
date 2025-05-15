@@ -84,12 +84,12 @@ public class ItemPedidoView {
         ItemPedidoDao itemPedidoDao = new ItemPedidoDao(em);
 
         List<ItemPedido> lista = itemPedidoDao.buscarTodos();
-        StringBuilder sb = new StringBuilder("ID - Item - Pedido - Quantidade - Valor Unitário - Valor Total\n");
+        StringBuilder sb = new StringBuilder("ID - Pedido - Item - Quantidade - Valor Unitário - Valor Total\n");
 
         for (ItemPedido p : lista) {
-            sb.append(p.getIdItemPedido()).append(" - ")
-                    .append(p.getItem().getNomeProduto()).append(" - Pedido nº: ")
+            sb.append(p.getIdItemPedido()).append(" - Pedido nº: ")
                     .append(p.getPedido().getIdPedido()).append(" - ")
+                    .append(p.getItem().getNomeProduto()).append(" - ")
                     .append(p.getQuantidadeItem()).append(" - ")
                     .append(p.getValorItem()).append(" - ")
                     .append(p.getValorTotalItem()).append("\n");
@@ -140,21 +140,18 @@ public class ItemPedidoView {
         return true;
     }
 
-    public void removerItemPedido(int id) {
+    public boolean removerItemPedido(int id) {
         EntityManager em = JPAUtil.getEntityManager();
         ItemPedidoDao itemPedidoDao = new ItemPedidoDao(em);
-
         ItemPedido itemPedido = itemPedidoDao.buscarPorID(id);
         if (itemPedido == null) {
             JOptionPane.showMessageDialog(null, "Item pedido não encontrado!");
-            return;
+            return false;
         }
-
         em.getTransaction().begin();
         itemPedidoDao.remover(itemPedido);
         em.getTransaction().commit();
         em.close();
-
-        JOptionPane.showMessageDialog(null, "Item pedido removido com sucesso!");
+        return true;
     }
 }

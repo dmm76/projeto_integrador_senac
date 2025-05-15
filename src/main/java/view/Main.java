@@ -8,7 +8,7 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
         String resultadoRetorno = "";
-        String[] botao = {"Cadastro", "Pedido", "Itens Pedidos", "Encerrar"};
+        String[] botao = {"Gerenciar", "Pedido", "Pedido Itens", "Encerrar"};
         String[] botaoEscolha= {"Cliente", "Fornecedor", "ProdutoItem", "FormaPagamento", "Categoria", "Marca", "Voltar"};
         String[] botaoCadastro = {"Cadastrar", "Consultar", "Alterar", "Deletar", "Voltar"};
 
@@ -273,7 +273,6 @@ public class Main {
                                 JOptionPane.showMessageDialog(null, "Operação cancelada.");
                                 break;
                             }
-
                             int id = Integer.parseInt(inputId);
                             if (pedidoView.alterarPedido(id)) {
                                 JOptionPane.showMessageDialog(null, "Pedido atualizado com sucesso!");
@@ -282,8 +281,16 @@ public class Main {
                             break;
                         case 3://Deletar
                             resultadoRetorno = pedidoView.consultarPedido();
-                            id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do pedido para atualizar: "));
-                            pedidoView.removerPedido(id);
+                            inputId = JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do pedido para remoção:");
+                            if (inputId == null || inputId.trim().isEmpty()) {
+                                JOptionPane.showMessageDialog(null, "Operação cancelada.");
+                                break;
+                            }
+                            id = Integer.parseInt(inputId);
+                            if (pedidoView.removerPedido(id)) {
+                                JOptionPane.showMessageDialog(null, "Pedido removido com sucesso!");
+
+                            }
                             break;
                     }
                     break;
@@ -313,8 +320,16 @@ public class Main {
                             break;
                         case 3://Deletar
                             resultadoRetorno = itemPedidoView.consultarItemPedido();
-                            id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do item pedido para atualizar: "));
-                            itemPedidoView.removerItemPedido(id);
+                            inputId = JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do item pedido para remoção:");
+                            if (inputId == null || inputId.trim().isEmpty()) {
+                                JOptionPane.showMessageDialog(null, "Operação cancelada.");
+                                break;
+                            }
+                            id = Integer.parseInt(inputId);
+                            if (itemPedidoView.removerItemPedido(id)) {
+                                JOptionPane.showMessageDialog(null, "Item Pedido removido com sucesso!");
+
+                            }
                             break;
                     }
                     break;

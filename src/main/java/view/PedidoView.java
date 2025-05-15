@@ -56,12 +56,20 @@ public class PedidoView {
             }
             int idCliente = Integer.parseInt(idClienteSrt);
 
-            String  valorTotalPedidoStr = JOptionPane.showInputDialog(null, "Digite o valor total do pedido: ");
-            if (valorTotalPedidoStr == null || valorTotalPedidoStr.trim().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
-                return false;
-            }
-            double valorTotalPedido = Double.parseDouble(valorTotalPedidoStr);
+//            String  valorTotalPedidoStr = JOptionPane.showInputDialog(null, "Digite o valor total do pedido: ");
+//            if (valorTotalPedidoStr == null || valorTotalPedidoStr.trim().isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
+//                return false;
+//            }
+//            double valorTotalPedido = Double.parseDouble(valorTotalPedidoStr);
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "O valor total do pedido será calculado automaticamente com base nos itens.\nValor atual: R$ 0.00",
+                    "Informação",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+            double valorTotalPedido = 0.0;
 
             // Busca dos objetos relacionados
             FormaPagamento formaPagamento = em.find(FormaPagamento.class, idFormaPagamento);
@@ -177,23 +185,22 @@ public class PedidoView {
         }
         return true;
     }
-    public void removerPedido(int id){
+    public boolean removerPedido(int id){
         //conexao com o banco
         EntityManager em = JPAUtil.getEntityManager();
         PedidoDao pedidoDao = new PedidoDao(em);
 
         Pedido pedido = pedidoDao.buscarPorID(id);
-
         if (pedido == null) {
             JOptionPane.showMessageDialog(null, "Pedido não encontrado!");
-            return;
+            return false;
         }
 
         em.getTransaction().begin();
         pedidoDao.remover(pedido);
         em.getTransaction().commit();
         em.close();
-
+        return true;
         //JOptionPane.showMessageDialog(null, "Pedido removido com sucesso!");
     }
 }

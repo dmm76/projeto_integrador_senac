@@ -1,12 +1,13 @@
 package util;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class EnvLoader {
     public static void load() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(".env"))) {
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(EnvLoader.class.getClassLoader().getResourceAsStream(".env")))) {
+
             String line;
             while ((line = reader.readLine()) != null) {
                 if (!line.contains("=")) continue;
@@ -15,8 +16,9 @@ public class EnvLoader {
                     System.setProperty(parts[0].trim(), parts[1].trim());
                 }
             }
-        } catch (IOException e) {
-            System.err.println("Erro ao carregar .env: " + e.getMessage());
+
+        } catch (Exception e) {
+            System.err.println("Erro ao carregar .env do classpath: " + e.getMessage());
         }
     }
 }
