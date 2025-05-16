@@ -250,9 +250,17 @@ public class Main {
                                         "Adicionar Itens",
                                         JOptionPane.YES_NO_OPTION);
                                 if (resposta == JOptionPane.YES_OPTION) {
-                                    if (pedidoItemView.cadastrarItemPedido()) {
+                                    int respostaContinua = 0;
+                                do{
+                                    if (pedidoItemView.cadastrarPedidoItem()) {
                                         JOptionPane.showMessageDialog(null, "Item Pedido cadastrado com sucesso");
                                     }
+                                    respostaContinua = JOptionPane.showConfirmDialog(null,
+                                            "Deseja adicionar mais itens a este pedido agora?",
+                                            "Adicionar Itens",
+                                            JOptionPane.YES_NO_OPTION);
+                                }while(respostaContinua != JOptionPane.NO_OPTION);
+
                                 } else if(resposta == JOptionPane.NO_OPTION){
                                     JOptionPane.showMessageDialog(null, "Item Pedido cancelado");
                                 }
@@ -295,35 +303,35 @@ public class Main {
                     opcaoEscolha = JOptionPane.showOptionDialog(null, "Selecione uma opção", "ITEM PEDIDO", 0,3, null, botaoCadastro, 0);
                     switch (opcaoEscolha){
                         case 0://Cadastrar
-                            if (pedidoItemView.cadastrarItemPedido()) {
+                            if (pedidoItemView.cadastrarPedidoItem()) {
                                 JOptionPane.showMessageDialog(null, "Item pedido cadastrado com sucesso");
                             }
                             break;
                         case 1://Consultar
-                            resultadoRetorno = pedidoItemView.consultarItemPedido();
+                            resultadoRetorno = pedidoItemView.consultarPedidoItem();
                             JOptionPane.showMessageDialog(null, resultadoRetorno);
                             break;
                         case 2://Alterar
-                            resultadoRetorno = pedidoItemView.consultarItemPedido();
+                            resultadoRetorno = pedidoItemView.consultarPedidoItem();
                             String inputId = JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do item pedido para atualizar:");
                             if (inputId == null || inputId.trim().isEmpty()) {
                                 JOptionPane.showMessageDialog(null, "Operação cancelada.");
                                 break;
                             }
                             int id = Integer.parseInt(inputId);
-                            if (pedidoItemView.alterarItemPedido(id)) {
+                            if (pedidoItemView.alterarPedidoItem(id)) {
                                 JOptionPane.showMessageDialog(null, "Pedido atualizado com sucesso!");
                             }
                             break;
                         case 3://Deletar
-                            resultadoRetorno = pedidoItemView.consultarItemPedido();
+                            resultadoRetorno = pedidoItemView.consultarPedidoItem();
                             inputId = JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do item pedido para remoção:");
                             if (inputId == null || inputId.trim().isEmpty()) {
                                 JOptionPane.showMessageDialog(null, "Operação cancelada.");
                                 break;
                             }
                             id = Integer.parseInt(inputId);
-                            if (pedidoItemView.removerItemPedido(id)) {
+                            if (pedidoItemView.removerPedidoItem(id)) {
                                 JOptionPane.showMessageDialog(null, "Item Pedido removido com sucesso!");
 
                             }

@@ -10,10 +10,9 @@ import java.util.List;
 
 public class PedidoItemView {
 
-    public boolean cadastrarItemPedido() {
+    public boolean cadastrarPedidoItem() {
         EntityManager em = JPAUtil.getEntityManager();
         PedidoItemDao pedidoItemDao = new PedidoItemDao(em);
-
         String resultado = null;
         try {
             ItemView itemView = new ItemView();
@@ -57,20 +56,15 @@ public class PedidoItemView {
                 JOptionPane.showMessageDialog(null, "Item ou Pedido não encontrado.");
                 return false;
             }
-
             //double valorTotalItem = quantidadeItem * valorItem;
-
             PedidoItem pedidoItem = new PedidoItem(item, pedido, quantidadeItem, valorItem);
-
             em.getTransaction().begin();
             pedidoItemDao.cadastrar(pedidoItem);
             em.getTransaction().commit();
             em.refresh(pedidoItem);
-
             JOptionPane.showMessageDialog(null,
                     "Item do pedido cadastrado com sucesso!\n" +
                             "Valor total: R$ " + String.format("%.2f", pedidoItem.getValorTotalItem()));
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar item do pedido: " + e.getMessage());
         } finally {
@@ -78,8 +72,7 @@ public class PedidoItemView {
         }
         return true;
     }
-
-    public String consultarItemPedido() {
+    public String consultarPedidoItem() {
         EntityManager em = JPAUtil.getEntityManager();
         PedidoItemDao pedidoItemDao = new PedidoItemDao(em);
 
@@ -87,7 +80,7 @@ public class PedidoItemView {
         StringBuilder sb = new StringBuilder("ID - Pedido - Item - Quantidade - Valor Unitário - Valor Total\n");
 
         for (PedidoItem p : lista) {
-            sb.append(p.getIdItemPedido()).append(" - Pedido nº: ")
+            sb.append(p.getIdIPedidoItem()).append(" - Pedido nº: ")
                     .append(p.getPedido().getIdPedido()).append(" - ")
                     .append(p.getItem().getNomeProduto()).append(" - ")
                     .append(p.getQuantidadeItem()).append(" - ")
@@ -99,7 +92,7 @@ public class PedidoItemView {
         return sb.toString();
     }
 
-    public boolean alterarItemPedido(int id) {
+    public boolean alterarPedidoItem(int id) {
         EntityManager em = JPAUtil.getEntityManager();
         PedidoItemDao pedidoItemDao = new PedidoItemDao(em);
 
@@ -140,7 +133,7 @@ public class PedidoItemView {
         return true;
     }
 
-    public boolean removerItemPedido(int id) {
+    public boolean removerPedidoItem(int id) {
         EntityManager em = JPAUtil.getEntityManager();
         PedidoItemDao pedidoItemDao = new PedidoItemDao(em);
         PedidoItem pedidoItem = pedidoItemDao.buscarPorID(id);

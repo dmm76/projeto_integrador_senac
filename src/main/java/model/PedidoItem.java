@@ -3,11 +3,11 @@ package model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "itempedido")
+@Table(name = "pedidoitem")
 public class PedidoItem {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private int idItemPedido;
+    private int idIPedidoItem;
 
     @ManyToOne
     @JoinColumn(name="idItem")
@@ -33,12 +33,12 @@ public class PedidoItem {
         //this.valorTotalItem = valorTotalItem;
     }
 
-    public int getIdItemPedido() {
-        return idItemPedido;
+    public int getIdIPedidoItem() {
+        return idIPedidoItem;
     }
 
-    public void setIdItemPedido(int idItemPedido) {
-        this.idItemPedido = idItemPedido;
+    public void setIdIPedidoItem(int idItemPedido) {
+        this.idIPedidoItem = idItemPedido;
     }
 
     public Item getItem() {
