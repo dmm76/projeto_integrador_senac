@@ -80,7 +80,7 @@ public class PedidoItemView {
         StringBuilder sb = new StringBuilder("ID - Pedido - Item - Quantidade - Valor Unitário - Valor Total\n");
 
         for (PedidoItem p : lista) {
-            sb.append(p.getIdIPedidoItem()).append(" - Pedido nº: ")
+            sb.append(p.getIdPedidoItem()).append(" - Pedido nº: ")
                     .append(p.getPedido().getIdPedido()).append(" - ")
                     .append(p.getItem().getNomeProduto()).append(" - ")
                     .append(p.getQuantidadeItem()).append(" - ")

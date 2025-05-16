@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class PedidoItem {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private int idIPedidoItem;
+    private int idPedidoItem;
 
     @ManyToOne
     @JoinColumn(name="idItem")
@@ -33,12 +33,12 @@ public class PedidoItem {
         //this.valorTotalItem = valorTotalItem;
     }
 
-    public int getIdIPedidoItem() {
-        return idIPedidoItem;
+    public int getIdPedidoItem() {
+        return idPedidoItem;
     }
 
-    public void setIdIPedidoItem(int idItemPedido) {
-        this.idIPedidoItem = idItemPedido;
+    public void setIdPedidoItem(int idItemPedido) {
+        this.idPedidoItem = idItemPedido;
     }
 
     public Item getItem() {
