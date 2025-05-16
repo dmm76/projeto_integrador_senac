@@ -86,7 +86,7 @@ public class PedidoView {
 
 //            JOptionPane.showMessageDialog(null, "Pedido cadastrado com sucesso!");
         } catch (ParseException e) {
-            JOptionPane.showMessageDialog(null, "Data inválida! Use o formato aaaa-mm-dd.");
+            JOptionPane.showMessageDialog(null, "Data inválida! Use o formato dd-MM-aaaa.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar pedido: " + e.getMessage());
         } finally {
@@ -104,7 +104,7 @@ public class PedidoView {
 
         for (Pedido p : todosRegistros) {
             resultado.append(p.getIdPedido()).append(" - ")
-                    .append(p.getDataPedido()).append(" - ")
+                    .append(new SimpleDateFormat("dd-MM-yyyy").format(p.getDataPedido())).append(" - ")
                     .append(p.getStatusPedido()).append(" - ")
                     .append(p.getCliente().getNomeCliente()).append(" - ")
                     .append(p.getFormaPagamento().getDescricao()).append(" - R$ ")
@@ -130,12 +130,16 @@ public class PedidoView {
         }
 
         try {
-            String dataStr = JOptionPane.showInputDialog(null, "Digite a nova data: (dd-mm-aaaa)", pedido.getDataPedido());
+            String dataStr = JOptionPane.showInputDialog(
+                    null,
+                    "Digite a nova data: (dd-mm-aaaa)",
+                    new SimpleDateFormat("dd-MM-yyyy").format(pedido.getDataPedido())
+            );
             if (dataStr == null || dataStr.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
                 return false;
             }
-            Date dataPedido = new SimpleDateFormat("dd-mm-aaaa").parse(dataStr);
+            Date dataPedido = new SimpleDateFormat("dd-MM-yyyy").parse(dataStr);
 
             String statusPedido = JOptionPane.showInputDialog(null, "Digite o novo status: ", pedido.getStatusPedido());
             if (statusPedido == null || statusPedido.trim().isEmpty()) {

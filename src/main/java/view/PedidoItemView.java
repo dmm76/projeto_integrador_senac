@@ -41,7 +41,13 @@ public class PedidoItemView {
             }
             int quantidadeItem = Integer.parseInt(quantidadeItemStr);
 
-            String valorItemStr = JOptionPane.showInputDialog("Digite o valor unitário do item: ");
+            Item item = em.find(Item.class, idItem);
+            if (item == null) {
+                JOptionPane.showMessageDialog(null, "Item não encontrado.");
+                return false;
+            }
+
+            String valorItemStr = JOptionPane.showInputDialog("Digite o valor unitário do item: ", item.getValorUnitarioProduto());
             if (valorItemStr == null || valorItemStr.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
                 return false;
@@ -50,9 +56,9 @@ public class PedidoItemView {
 
             // Buscar objetos
             Pedido pedido = em.find(Pedido.class, idPedido);
-            Item item = em.find(Item.class, idItem);
+            //Item item = em.find(Item.class, idItem);
 
-            if (pedido == null || item == null) {
+            if (pedido == null) {
                 JOptionPane.showMessageDialog(null, "Item ou Pedido não encontrado.");
                 return false;
             }
@@ -103,10 +109,30 @@ public class PedidoItemView {
         }
 
         try {
-            int idItem = Integer.parseInt(JOptionPane.showInputDialog("Novo ID do Item:", pedidoItem.getItem().getIdItem()));
-            int idPedido = Integer.parseInt(JOptionPane.showInputDialog("Novo ID do Pedido:", pedidoItem.getPedido().getIdPedido()));
-            int quantidadeItem = Integer.parseInt(JOptionPane.showInputDialog("Nova quantidade:", pedidoItem.getQuantidadeItem()));
-            double valorItem = Double.parseDouble(JOptionPane.showInputDialog("Novo valor unitário:", pedidoItem.getValorItem()));
+            ItemView itemView = new ItemView();
+            String itens = itemView.consultarItens(); // Supondo que retorna ID - Nome etc.
+            String idItemStr = JOptionPane.showInputDialog(null, itens, "Novo ID do Item:", JOptionPane.QUESTION_MESSAGE, null, null, pedidoItem.getItem().getIdItem()).toString();
+            int idItem = Integer.parseInt(idItemStr);
+
+            PedidoView pedidoView = new PedidoView();
+            String pedidos = pedidoView.consultarPedido(); // Exibe ID - Data - Cliente etc.
+            String idPedidoStr = JOptionPane.showInputDialog(null, pedidos, "Novo ID do Pedido:", JOptionPane.QUESTION_MESSAGE, null, null, pedidoItem.getPedido().getIdPedido()).toString();
+            int idPedido = Integer.parseInt(idPedidoStr);
+
+
+            String quantidadeItemStr = JOptionPane.showInputDialog(null,"Nova quantidade de itens:",pedidoItem.getQuantidadeItem());
+            if (quantidadeItemStr == null || quantidadeItemStr.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Alteração cancelada.");
+                return false;
+            }
+            int quantidadeItem = Integer.parseInt(quantidadeItemStr);
+
+            String valorItemStr = JOptionPane.showInputDialog(null,"Novo valor unitário do item:",pedidoItem.getValorItem());
+            if (valorItemStr == null || valorItemStr.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Alteração cancelada.");
+                return false;
+            }
+            double valorItem = Double.parseDouble(valorItemStr);
 
             Item item = em.find(Item.class, idItem);
             Pedido pedido = em.find(Pedido.class, idPedido);
