@@ -4,7 +4,7 @@
       <img src="https://github.com/dmm76/tcc_senac/blob/main/src/main/java/util/images/BR_Sistema_LOGO2.png?raw=true" alt="Logo_BR" width="150">
     </td>
     <td>
-      <h1>**PI - Sistema Bar e Restaurantes (Senac)**</h1>
+      <h1>Sistema Bar e Restaurantes (Senac)</h1>
     </td>
   </tr>
 </table>
