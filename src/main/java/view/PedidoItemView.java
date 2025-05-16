@@ -1,6 +1,6 @@
 package view;
 
-import dao.ItemPedidoDao;
+import dao.PedidoItemDao;
 import model.*;
 import util.JPAUtil;
 
@@ -8,11 +8,11 @@ import javax.persistence.EntityManager;
 import javax.swing.*;
 import java.util.List;
 
-public class ItemPedidoView {
+public class PedidoItemView {
 
     public boolean cadastrarItemPedido() {
         EntityManager em = JPAUtil.getEntityManager();
-        ItemPedidoDao itemPedidoDao = new ItemPedidoDao(em);
+        PedidoItemDao pedidoItemDao = new PedidoItemDao(em);
 
         String resultado = null;
         try {
@@ -60,16 +60,16 @@ public class ItemPedidoView {
 
             //double valorTotalItem = quantidadeItem * valorItem;
 
-            ItemPedido itemPedido = new ItemPedido(item, pedido, quantidadeItem, valorItem);
+            PedidoItem pedidoItem = new PedidoItem(item, pedido, quantidadeItem, valorItem);
 
             em.getTransaction().begin();
-            itemPedidoDao.cadastrar(itemPedido);
+            pedidoItemDao.cadastrar(pedidoItem);
             em.getTransaction().commit();
-            em.refresh(itemPedido);
+            em.refresh(pedidoItem);
 
             JOptionPane.showMessageDialog(null,
                     "Item do pedido cadastrado com sucesso!\n" +
-                            "Valor total: R$ " + String.format("%.2f", itemPedido.getValorTotalItem()));
+                            "Valor total: R$ " + String.format("%.2f", pedidoItem.getValorTotalItem()));
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar item do pedido: " + e.getMessage());
@@ -81,12 +81,12 @@ public class ItemPedidoView {
 
     public String consultarItemPedido() {
         EntityManager em = JPAUtil.getEntityManager();
-        ItemPedidoDao itemPedidoDao = new ItemPedidoDao(em);
+        PedidoItemDao pedidoItemDao = new PedidoItemDao(em);
 
-        List<ItemPedido> lista = itemPedidoDao.buscarTodos();
+        List<PedidoItem> lista = pedidoItemDao.buscarTodos();
         StringBuilder sb = new StringBuilder("ID - Pedido - Item - Quantidade - Valor Unitário - Valor Total\n");
 
-        for (ItemPedido p : lista) {
+        for (PedidoItem p : lista) {
             sb.append(p.getIdItemPedido()).append(" - Pedido nº: ")
                     .append(p.getPedido().getIdPedido()).append(" - ")
                     .append(p.getItem().getNomeProduto()).append(" - ")
@@ -101,19 +101,19 @@ public class ItemPedidoView {
 
     public boolean alterarItemPedido(int id) {
         EntityManager em = JPAUtil.getEntityManager();
-        ItemPedidoDao itemPedidoDao = new ItemPedidoDao(em);
+        PedidoItemDao pedidoItemDao = new PedidoItemDao(em);
 
-        ItemPedido itemPedido = itemPedidoDao.buscarPorID(id);
-        if (itemPedido == null) {
+        PedidoItem pedidoItem = pedidoItemDao.buscarPorID(id);
+        if (pedidoItem == null) {
             JOptionPane.showMessageDialog(null, "Item pedido não encontrado!");
             return false;
         }
 
         try {
-            int idItem = Integer.parseInt(JOptionPane.showInputDialog("Novo ID do Item:", itemPedido.getItem().getIdItem()));
-            int idPedido = Integer.parseInt(JOptionPane.showInputDialog("Novo ID do Pedido:", itemPedido.getPedido().getIdPedido()));
-            int quantidadeItem = Integer.parseInt(JOptionPane.showInputDialog("Nova quantidade:", itemPedido.getQuantidadeItem()));
-            double valorItem = Double.parseDouble(JOptionPane.showInputDialog("Novo valor unitário:", itemPedido.getValorItem()));
+            int idItem = Integer.parseInt(JOptionPane.showInputDialog("Novo ID do Item:", pedidoItem.getItem().getIdItem()));
+            int idPedido = Integer.parseInt(JOptionPane.showInputDialog("Novo ID do Pedido:", pedidoItem.getPedido().getIdPedido()));
+            int quantidadeItem = Integer.parseInt(JOptionPane.showInputDialog("Nova quantidade:", pedidoItem.getQuantidadeItem()));
+            double valorItem = Double.parseDouble(JOptionPane.showInputDialog("Novo valor unitário:", pedidoItem.getValorItem()));
 
             Item item = em.find(Item.class, idItem);
             Pedido pedido = em.find(Pedido.class, idPedido);
@@ -121,16 +121,16 @@ public class ItemPedidoView {
             double valorTotalItem = quantidadeItem * valorItem;
 
             em.getTransaction().begin();
-            itemPedido.setItem(item);
-            itemPedido.setPedido(pedido);
-            itemPedido.setQuantidadeItem(quantidadeItem);
-            itemPedido.setValorItem(valorItem);
-//            itemPedido.setValorTotalItem(valorTotalItem);
+            pedidoItem.setItem(item);
+            pedidoItem.setPedido(pedido);
+            pedidoItem.setQuantidadeItem(quantidadeItem);
+            pedidoItem.setValorItem(valorItem);
+//            pedidoItem.setValorTotalItem(valorTotalItem);
             em.getTransaction().commit();
 
             JOptionPane.showMessageDialog(null,
                     "Item pedido atualizado com sucesso!\n" +
-                            "Novo total: R$ " + String.format("%.2f", itemPedido.getValorTotalItem()));
+                            "Novo total: R$ " + String.format("%.2f", pedidoItem.getValorTotalItem()));
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar item pedido: " + e.getMessage());
@@ -142,14 +142,14 @@ public class ItemPedidoView {
 
     public boolean removerItemPedido(int id) {
         EntityManager em = JPAUtil.getEntityManager();
-        ItemPedidoDao itemPedidoDao = new ItemPedidoDao(em);
-        ItemPedido itemPedido = itemPedidoDao.buscarPorID(id);
-        if (itemPedido == null) {
+        PedidoItemDao pedidoItemDao = new PedidoItemDao(em);
+        PedidoItem pedidoItem = pedidoItemDao.buscarPorID(id);
+        if (pedidoItem == null) {
             JOptionPane.showMessageDialog(null, "Item pedido não encontrado!");
             return false;
         }
         em.getTransaction().begin();
-        itemPedidoDao.remover(itemPedido);
+        pedidoItemDao.remover(pedidoItem);
         em.getTransaction().commit();
         em.close();
         return true;

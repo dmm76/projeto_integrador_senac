@@ -23,6 +23,7 @@ public class MarcaDao {
         String jpql = "Select m FROM Marca m";
         return em.createQuery(jpql, Marca.class).getResultList();
     }
+
     //buscar por Id
     public Marca buscarPorID(int id){
         return em.find(Marca.class, id);

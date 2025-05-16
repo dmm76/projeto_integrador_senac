@@ -1,8 +1,5 @@
 package view;
 
-import dao.ItemDao;
-import model.FormaPagamento;
-
 import javax.swing.*;
 
 public class Main {
@@ -19,7 +16,7 @@ public class Main {
         CategoriaView categoriaView = new CategoriaView();
         MarcaView marcaView = new MarcaView();
         PedidoView pedidoView = new PedidoView();
-       ItemPedidoView itemPedidoView = new ItemPedidoView();
+       PedidoItemView pedidoItemView = new PedidoItemView();
 
         int opcao = 0, opcaoEscolha, opcaoCadastro;
         do{
@@ -253,7 +250,7 @@ public class Main {
                                         "Adicionar Itens",
                                         JOptionPane.YES_NO_OPTION);
                                 if (resposta == JOptionPane.YES_OPTION) {
-                                    if (itemPedidoView.cadastrarItemPedido()) {
+                                    if (pedidoItemView.cadastrarItemPedido()) {
                                         JOptionPane.showMessageDialog(null, "Item Pedido cadastrado com sucesso");
                                     }
                                 } else if(resposta == JOptionPane.NO_OPTION){
@@ -298,35 +295,35 @@ public class Main {
                     opcaoEscolha = JOptionPane.showOptionDialog(null, "Selecione uma opção", "ITEM PEDIDO", 0,3, null, botaoCadastro, 0);
                     switch (opcaoEscolha){
                         case 0://Cadastrar
-                            if (itemPedidoView.cadastrarItemPedido()) {
+                            if (pedidoItemView.cadastrarItemPedido()) {
                                 JOptionPane.showMessageDialog(null, "Item pedido cadastrado com sucesso");
                             }
                             break;
                         case 1://Consultar
-                            resultadoRetorno = itemPedidoView.consultarItemPedido();
+                            resultadoRetorno = pedidoItemView.consultarItemPedido();
                             JOptionPane.showMessageDialog(null, resultadoRetorno);
                             break;
                         case 2://Alterar
-                            resultadoRetorno = itemPedidoView.consultarItemPedido();
+                            resultadoRetorno = pedidoItemView.consultarItemPedido();
                             String inputId = JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do item pedido para atualizar:");
                             if (inputId == null || inputId.trim().isEmpty()) {
                                 JOptionPane.showMessageDialog(null, "Operação cancelada.");
                                 break;
                             }
                             int id = Integer.parseInt(inputId);
-                            if (itemPedidoView.alterarItemPedido(id)) {
+                            if (pedidoItemView.alterarItemPedido(id)) {
                                 JOptionPane.showMessageDialog(null, "Pedido atualizado com sucesso!");
                             }
                             break;
                         case 3://Deletar
-                            resultadoRetorno = itemPedidoView.consultarItemPedido();
+                            resultadoRetorno = pedidoItemView.consultarItemPedido();
                             inputId = JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id do item pedido para remoção:");
                             if (inputId == null || inputId.trim().isEmpty()) {
                                 JOptionPane.showMessageDialog(null, "Operação cancelada.");
                                 break;
                             }
                             id = Integer.parseInt(inputId);
-                            if (itemPedidoView.removerItemPedido(id)) {
+                            if (pedidoItemView.removerItemPedido(id)) {
                                 JOptionPane.showMessageDialog(null, "Item Pedido removido com sucesso!");
 
                             }
