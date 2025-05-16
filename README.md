@@ -4,12 +4,12 @@
       <img src="https://github.com/dmm76/tcc_senac/blob/main/src/main/java/util/images/BR_Sistema_LOGO2.png?raw=true" alt="Logo_BR" width="150">
     </td>
     <td>
-      <h1>PI - Sistema Bar e Restaurantes (Senac)</h1>
+      <h1>**PI - Sistema Bar e Restaurantes (Senac)**</h1>
     </td>
   </tr>
 </table>
 
-Este repositório contém o projeto de Trabalho de Conclusão de Curso (TCC) desenvolvido para a professora **Claudia Tupan**, do curso de **Desenvolvimento de Sistemas - Senac**.
+Este repositório contém o projeto de Trabalho de Conclusão de Curso (Projeto Integrador) desenvolvido para a professora **Claudia Tupan**, do curso de **Desenvolvimento de Sistemas - Senac**.
 
 ![Diagrama DDR](https://github.com/dmm76/tcc_senac/blob/main/src/main/java/util/images/ddr-banco.png?raw=true)
 
