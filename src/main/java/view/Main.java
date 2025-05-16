@@ -4,6 +4,15 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
+        UIManager.put("OptionPane.buttonClickThreshhold", 500);
+        UIManager.put("Button.focusInputMap", new UIDefaults.LazyInputMap(new Object[] {
+                "SPACE", "pressed",
+                "released SPACE", "released",
+                "ENTER", "pressed",
+                "released ENTER", "released",
+                "TAB", "focusNext",
+                "shift TAB", "focusPrevious"
+        }));
         String resultadoRetorno = "";
         String[] botao = {"Gerenciar", "Pedido", "Pedido Itens", "Encerrar"};
         String[] botaoEscolha= {"Cliente", "Fornecedor", "ProdutoItem", "FormaPagamento", "Categoria", "Marca", "Voltar"};

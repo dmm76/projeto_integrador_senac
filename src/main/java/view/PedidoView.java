@@ -23,12 +23,13 @@ public class PedidoView {
 
         try {
             // Entrada de dados com parsing de tipos
-            String dataStr = JOptionPane.showInputDialog(null, "Digite a data: (aaaa-mm-dd)");
+            String dataStr = JOptionPane.showInputDialog(null, "Digite a data: (dd-mm-aaaa)");
             if (dataStr == null || dataStr.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
                 return false;
             }
-            Date dataPedido = new SimpleDateFormat("yyyy-MM-dd").parse(dataStr);
+            Date dataPedido = new SimpleDateFormat("dd-MM-yyyy").parse(dataStr);
+
 
             String statusPedido = JOptionPane.showInputDialog(null, "Digite o status: ");
             if (statusPedido == null || statusPedido.trim().isEmpty()) {
@@ -129,12 +130,12 @@ public class PedidoView {
         }
 
         try {
-            String dataStr = JOptionPane.showInputDialog(null, "Digite a nova data: (aaaa-mm-dd)", pedido.getDataPedido());
+            String dataStr = JOptionPane.showInputDialog(null, "Digite a nova data: (dd-mm-aaaa)", pedido.getDataPedido());
             if (dataStr == null || dataStr.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
                 return false;
             }
-            Date dataPedido = new SimpleDateFormat("yyyy-MM-dd").parse(dataStr);
+            Date dataPedido = new SimpleDateFormat("dd-mm-aaaa").parse(dataStr);
 
             String statusPedido = JOptionPane.showInputDialog(null, "Digite o novo status: ", pedido.getStatusPedido());
             if (statusPedido == null || statusPedido.trim().isEmpty()) {
