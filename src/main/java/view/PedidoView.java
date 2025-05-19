@@ -17,53 +17,36 @@ import java.util.List;
 public class PedidoView {
 
     public boolean cadastrarPedido() {
-        //conexao com o banco
         EntityManager em = JPAUtil.getEntityManager();
         PedidoDao pedidoDao = new PedidoDao(em);
-
         try {
-            // Entrada de dados com parsing de tipos
             String dataStr = JOptionPane.showInputDialog(null, "Digite a data: (dd-mm-aaaa)");
             if (dataStr == null || dataStr.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
                 return false;
             }
             Date dataPedido = new SimpleDateFormat("dd-MM-yyyy").parse(dataStr);
-
-
             String statusPedido = JOptionPane.showInputDialog(null, "Digite o status: ");
             if (statusPedido == null || statusPedido.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
                 return false;
             }
-
             FormaPagamentoView formaPagamentoView = new FormaPagamentoView();
             String resultado = formaPagamentoView.consultarFormaPagamento();
-            //JOptionPane.showMessageDialog(null, formaPagamentoView.consultarFormaPagamento());
             String idFormaStr = JOptionPane.showInputDialog(null, resultado,"Digite o ID da Forma de Pagamento:");
             if (idFormaStr == null || idFormaStr.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
                 return false;
             }
             int idFormaPagamento = Integer.parseInt(idFormaStr);
-
             ClienteView clienteView = new ClienteView();
             resultado = clienteView.consultarCliente();
-           // JOptionPane.showMessageDialog(null, clienteView.consultarCliente());
             String idClienteSrt = JOptionPane.showInputDialog(null, resultado,"Digite o ID do Cliente: ");
             if (idClienteSrt == null || idClienteSrt.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
                 return false;
             }
             int idCliente = Integer.parseInt(idClienteSrt);
-
-//            String  valorTotalPedidoStr = JOptionPane.showInputDialog(null, "Digite o valor total do pedido: ");
-//            if (valorTotalPedidoStr == null || valorTotalPedidoStr.trim().isEmpty()) {
-//                JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
-//                return false;
-//            }
-//            double valorTotalPedido = Double.parseDouble(valorTotalPedidoStr);
-
             JOptionPane.showMessageDialog(
                     null,
                     "O valor total do pedido será calculado automaticamente com base nos itens.\nValor atual: R$ 0.00",
@@ -71,20 +54,12 @@ public class PedidoView {
                     JOptionPane.INFORMATION_MESSAGE
             );
             double valorTotalPedido = 0.0;
-
-            // Busca dos objetos relacionados
             FormaPagamento formaPagamento = em.find(FormaPagamento.class, idFormaPagamento);
             Cliente cliente = em.find(Cliente.class, idCliente);
-
-            // Criação do pedido
             Pedido pedido = new Pedido(dataPedido, statusPedido, valorTotalPedido, cliente, formaPagamento);
-
-            // Persistência
             em.getTransaction().begin();
             pedidoDao.cadastrar(pedido);
             em.getTransaction().commit();
-
-//            JOptionPane.showMessageDialog(null, "Pedido cadastrado com sucesso!");
         } catch (ParseException e) {
             JOptionPane.showMessageDialog(null, "Data inválida! Use o formato aaaa-mm-dd.");
         } catch (Exception e) {
@@ -111,7 +86,6 @@ public class PedidoView {
                     .append(String.format("%.2f", p.getValorTotalPedido()))
                     .append("\n");
         }
-
         em.close();
         return resultado.toString();
     }
