@@ -317,7 +317,7 @@ public class Main {
                             }
                             break;
                         case 1://Consultar
-                            resultadoRetorno = pedidoItemView.consultarPedidoItem();
+                            resultadoRetorno = pedidoItemView.consultarPedidoItemComFiltro();
                             JOptionPane.showMessageDialog(null, resultadoRetorno);
                             break;
                         case 2://Alterar

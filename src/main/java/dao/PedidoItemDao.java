@@ -26,6 +26,12 @@ public class PedidoItemDao {
     public PedidoItem buscarPorID(int id){
         return em.find(PedidoItem.class, id);
     }
+    public List<PedidoItem> buscarPorIdPedido(int idPedido) {
+        String jpql = "SELECT pi FROM PedidoItem pi WHERE pi.pedido.idPedido = :idPedido";
+        return em.createQuery(jpql, PedidoItem.class)
+                .setParameter("idPedido", idPedido)
+                .getResultList();
+    }
     //remover
     public void remover(PedidoItem pedidoItem){
         if (!em.contains(pedidoItem)) {

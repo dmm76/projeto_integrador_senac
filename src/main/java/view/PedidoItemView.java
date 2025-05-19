@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.util.List;
 
 public class PedidoItemView {
-
     public boolean cadastrarPedidoItem() {
         EntityManager em = JPAUtil.getEntityManager();
         PedidoItemDao pedidoItemDao = new PedidoItemDao(em);
@@ -23,7 +22,6 @@ public class PedidoItemView {
                 return false;
             }
             int idItem = Integer.parseInt(idItemStr);
-
             PedidoView pedidoView = new PedidoView();
             resultado = pedidoView.consultarPedido();
             String idPedidoStr = JOptionPane.showInputDialog(null, resultado, "Digite o ID do Pedido: ");
@@ -32,8 +30,6 @@ public class PedidoItemView {
                 return false;
             }
             int idPedido = Integer.parseInt(idPedidoStr);
-
-
             String quantidadeItemStr = JOptionPane.showInputDialog("Digite a quantidade de itens: ");
             if (quantidadeItemStr == null || quantidadeItemStr.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
@@ -54,10 +50,6 @@ public class PedidoItemView {
                 return false;
             }
             double valorItem = Double.parseDouble(valorItemStr);
-
-            // Buscar objetos
-
-            //double valorTotalItem = quantidadeItem * valorItem;
             PedidoItem pedidoItem = new PedidoItem(item, pedido, quantidadeItem, valorItem);
             em.getTransaction().begin();
             pedidoItemDao.cadastrar(pedidoItem);
@@ -76,10 +68,8 @@ public class PedidoItemView {
     public String consultarPedidoItem() {
         EntityManager em = JPAUtil.getEntityManager();
         PedidoItemDao pedidoItemDao = new PedidoItemDao(em);
-
         List<PedidoItem> lista = pedidoItemDao.buscarTodos();
         StringBuilder sb = new StringBuilder("ID - Pedido - Item - Quantidade - Valor Unitário - Valor Total\n");
-
         for (PedidoItem p : lista) {
             sb.append(p.getIdPedidoItem()).append(" - Pedido nº: ")
                     .append(p.getPedido().getIdPedido()).append(" - ")
@@ -88,40 +78,31 @@ public class PedidoItemView {
                     .append(p.getValorItem()).append(" - ")
                     .append(p.getValorTotalItem()).append("\n");
         }
-
         em.close();
         return sb.toString();
     }
-
     public boolean alterarPedidoItem(int id) {
         EntityManager em = JPAUtil.getEntityManager();
         PedidoItemDao pedidoItemDao = new PedidoItemDao(em);
-
         PedidoItem pedidoItem = pedidoItemDao.buscarPorID(id);
         if (pedidoItem == null) {
             JOptionPane.showMessageDialog(null, "Item pedido não encontrado!");
             return false;
         }
-
         try {
             int idItem = Integer.parseInt(JOptionPane.showInputDialog("Novo ID do Item:", pedidoItem.getItem().getIdItem()));
             int idPedido = Integer.parseInt(JOptionPane.showInputDialog("Novo ID do Pedido:", pedidoItem.getPedido().getIdPedido()));
             int quantidadeItem = Integer.parseInt(JOptionPane.showInputDialog("Nova quantidade:", pedidoItem.getQuantidadeItem()));
             double valorItem = Double.parseDouble(JOptionPane.showInputDialog("Novo valor unitário:", pedidoItem.getValorItem()));
-
             Item item = em.find(Item.class, idItem);
             Pedido pedido = em.find(Pedido.class, idPedido);
-
             double valorTotalItem = quantidadeItem * valorItem;
-
             em.getTransaction().begin();
             pedidoItem.setItem(item);
             pedidoItem.setPedido(pedido);
             pedidoItem.setQuantidadeItem(quantidadeItem);
             pedidoItem.setValorItem(valorItem);
-//            pedidoItem.setValorTotalItem(valorTotalItem);
             em.getTransaction().commit();
-
             JOptionPane.showMessageDialog(null,
                     "Item pedido atualizado com sucesso!\n" +
                             "Novo total: R$ " + String.format("%.2f", pedidoItem.getValorTotalItem()));
@@ -133,7 +114,6 @@ public class PedidoItemView {
         }
         return true;
     }
-
     public boolean removerPedidoItem(int id) {
         EntityManager em = JPAUtil.getEntityManager();
         PedidoItemDao pedidoItemDao = new PedidoItemDao(em);
@@ -148,4 +128,55 @@ public class PedidoItemView {
         em.close();
         return true;
     }
+    public String consultarPedidoItemPorPedido(int idPedido) {
+        EntityManager em = JPAUtil.getEntityManager();
+        PedidoItemDao pedidoItemDao = new PedidoItemDao(em);
+        
+        List<PedidoItem> lista = pedidoItemDao.buscarPorIdPedido(idPedido);
+        StringBuilder sb = new StringBuilder("Itens do Pedido nº: " + idPedido + "\n");
+        sb.append("ID - Item - Quantidade - Valor Unitário - Valor Total\n");
+
+        for (PedidoItem p : lista) {
+            sb.append(p.getIdPedidoItem()).append(" - ")
+                    .append(p.getItem().getNomeProduto()).append(" - ")
+                    .append(p.getQuantidadeItem()).append(" - ")
+                    .append(String.format("R$ %.2f", p.getValorItem())).append(" - ")
+                    .append(String.format("R$ %.2f", p.getValorTotalItem())).append("\n");
+        }
+
+        if (lista.isEmpty()) {
+            sb.append("Nenhum item encontrado para esse pedido.");
+        }
+
+        em.close();
+        return sb.toString();
+    }
+    public String consultarPedidoItemComFiltro() {
+        int escolha = JOptionPane.showConfirmDialog(
+                null,
+                "Deseja buscar os itens por ID do Pedido?",
+                "Consulta de Itens",
+                JOptionPane.YES_NO_CANCEL_OPTION
+        );
+
+        if (escolha == JOptionPane.CANCEL_OPTION || escolha == JOptionPane.CLOSED_OPTION) {
+            return "Consulta cancelada.";
+        }
+
+        if (escolha == JOptionPane.YES_OPTION) {
+            String idPedidoStr = JOptionPane.showInputDialog("Digite o ID do Pedido:");
+            if (idPedidoStr == null || idPedidoStr.trim().isEmpty()) {
+                return "ID não informado. Consulta cancelada.";
+            }
+
+            try {
+                int idPedido = Integer.parseInt(idPedidoStr);
+                return consultarPedidoItemPorPedido(idPedido);
+            } catch (NumberFormatException e) {
+                return "ID inválido. Digite um número inteiro.";
+            }
+        }
+        return consultarPedidoItem();
+    }
+
 }
