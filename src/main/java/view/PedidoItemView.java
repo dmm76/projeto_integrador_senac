@@ -32,6 +32,8 @@ public class PedidoItemView {
                 return false;
             }
             int idPedido = Integer.parseInt(idPedidoStr);
+
+
             String quantidadeItemStr = JOptionPane.showInputDialog("Digite a quantidade de itens: ");
             if (quantidadeItemStr == null || quantidadeItemStr.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
@@ -39,15 +41,7 @@ public class PedidoItemView {
             }
             int quantidadeItem = Integer.parseInt(quantidadeItemStr);
 
-            Pedido pedido = em.find(Pedido.class, idPedido);
-            Item item = em.find(Item.class, idItem);
-
-            if (pedido == null || item == null) {
-                JOptionPane.showMessageDialog(null, "Item ou Pedido não encontrado.");
-                return false;
-            }
-
-            String valorItemStr = JOptionPane.showInputDialog("Digite o valor unitário do item: ", item.getValorUnitarioProduto());
+            String valorItemStr = JOptionPane.showInputDialog("Digite o valor unitário do item: ");
             if (valorItemStr == null || valorItemStr.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
                 return false;
@@ -55,7 +49,13 @@ public class PedidoItemView {
             double valorItem = Double.parseDouble(valorItemStr);
 
             // Buscar objetos
+            Pedido pedido = em.find(Pedido.class, idPedido);
+            Item item = em.find(Item.class, idItem);
 
+            if (pedido == null || item == null) {
+                JOptionPane.showMessageDialog(null, "Item ou Pedido não encontrado.");
+                return false;
+            }
             //double valorTotalItem = quantidadeItem * valorItem;
             PedidoItem pedidoItem = new PedidoItem(item, pedido, quantidadeItem, valorItem);
             em.getTransaction().begin();
