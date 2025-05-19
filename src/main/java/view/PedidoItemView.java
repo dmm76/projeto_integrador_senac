@@ -131,7 +131,7 @@ public class PedidoItemView {
     public String consultarPedidoItemPorPedido(int idPedido) {
         EntityManager em = JPAUtil.getEntityManager();
         PedidoItemDao pedidoItemDao = new PedidoItemDao(em);
-        
+
         List<PedidoItem> lista = pedidoItemDao.buscarPorIdPedido(idPedido);
         StringBuilder sb = new StringBuilder("Itens do Pedido nº: " + idPedido + "\n");
         sb.append("ID - Item - Quantidade - Valor Unitário - Valor Total\n");
@@ -178,5 +178,4 @@ public class PedidoItemView {
         }
         return consultarPedidoItem();
     }
-
 }
