@@ -61,14 +61,12 @@ public class CategoriaView {
             em.close();
             return false;
         }
-
         String novaDescricao = JOptionPane.showInputDialog("Digite a nova descricao da categoria: ", categoria.getDescricao());
         if (novaDescricao == null || novaDescricao.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Alteração cancelada.");
             em.close();
             return false;
         }
-
         em.getTransaction().begin();
         categoria.setDescricao(novaDescricao);
         em.getTransaction().commit();
@@ -79,14 +77,12 @@ public class CategoriaView {
         //conexao com o banco
         EntityManager em = JPAUtil.getEntityManager();
         CategoriaDao categoriaDao = new CategoriaDao(em);
-
        Categoria categoria = categoriaDao.buscarPorID(id);
         if (categoria == null) {
             JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
             em.close();
             return false;
         }
-
         em.getTransaction().begin();
         em.remove(categoria);
         em.getTransaction().commit();

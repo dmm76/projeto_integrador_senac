@@ -35,7 +35,7 @@ public class Main {
                     opcaoEscolha = JOptionPane.showOptionDialog(null, "Selecione uma opção", "MENU CADASTRO", 0,3, null, botaoEscolha, 0);
                     switch (opcaoEscolha){
                         case 0://Cliente
-                            opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Cliente", 0,3, null, botaoCadastro, 0);
+                            opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "CLIENTE", 0,3, null, botaoCadastro, 0);
                             switch (opcaoCadastro){
                                 case 0://Cadastrar
                                     if (clienteView.cadastrarCliente()) {
@@ -53,8 +53,8 @@ public class Main {
                                         JOptionPane.showMessageDialog(null, "Operação cancelada.");
                                         break;
                                     }
-                                    int idAlt = Integer.parseInt(inputAlt);
-                                    if (clienteView.alterarCliente(idAlt)) {
+                                    int id = Integer.parseInt(inputAlt);
+                                    if (clienteView.alterarCliente(id)) {
                                         JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso!");
                                     }
                                     break;
@@ -65,15 +65,15 @@ public class Main {
                                         JOptionPane.showMessageDialog(null, "Operação cancelada.");
                                         break;
                                     }
-                                    int idDel = Integer.parseInt(inputDel);
-                                    if (clienteView.removerCliente(idDel)) {
+                                    id = Integer.parseInt(inputDel);
+                                    if (clienteView.removerCliente(id)) {
                                         JOptionPane.showMessageDialog(null, "Cliente removido com sucesso!");
                                     }
                                     break;
                             }
                             break;
                         case 1://Fornecedor
-                            opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Fornecedor", 0,3, null, botaoCadastro, 0);
+                            opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "FORNECEDOR", 0,3, null, botaoCadastro, 0);
                             switch (opcaoCadastro){
                                 case 0://Cadastrar
                                     if (fornecedorView.cadastrarFornecedor()) {
@@ -91,8 +91,8 @@ public class Main {
                                         JOptionPane.showMessageDialog(null, "Operação cancelada.");
                                         break;
                                     }
-                                    int idAlt = Integer.parseInt(inputAlt);
-                                    if (fornecedorView.alterarFornecedor(idAlt)) {
+                                    int id = Integer.parseInt(inputAlt);
+                                    if (fornecedorView.alterarFornecedor(id)) {
                                         JOptionPane.showMessageDialog(null, "Fornecedor atualizado com sucesso!");
                                     }
                                     break;
@@ -103,15 +103,15 @@ public class Main {
                                         JOptionPane.showMessageDialog(null, "Operação cancelada.");
                                         break;
                                     }
-                                    int idDel = Integer.parseInt(inputDel);
-                                    if (fornecedorView.removerFornecedor(idDel)) {
+                                    id = Integer.parseInt(inputDel);
+                                    if (fornecedorView.removerFornecedor(id)) {
                                         JOptionPane.showMessageDialog(null, "Fornecedor removido com sucesso!");
                                     }
                                     break;
                             }
                             break;
                         case 2://ProdutoItem
-                            opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Item", 0,3, null, botaoCadastro, 0);
+                            opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "ITEM", 0,3, null, botaoCadastro, 0);
                             switch (opcaoCadastro){
                                 case 0://Cadastrar
                                     if (itemView.cadastrarItem()) {
@@ -129,8 +129,8 @@ public class Main {
                                         JOptionPane.showMessageDialog(null, "Operação cancelada.");
                                         break;
                                     }
-                                    int idAlt = Integer.parseInt(inputAlt);
-                                    if (itemView.alterarItem(idAlt)) {
+                                    int id = Integer.parseInt(inputAlt);
+                                    if (itemView.alterarItem(id)) {
                                         JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso!");
                                     }
                                     break;
@@ -141,15 +141,15 @@ public class Main {
                                         JOptionPane.showMessageDialog(null, "Operação cancelada.");
                                         break;
                                     }
-                                    int idDel = Integer.parseInt(inputDel);
-                                    if (itemView.removerItem(idDel)) {
+                                    id = Integer.parseInt(inputDel);
+                                    if (itemView.removerItem(id)) {
                                         JOptionPane.showMessageDialog(null, "Produto removido com sucesso!");
                                     }
                                     break;
                             }
                             break;
                         case 3://FormaPagamento
-                            opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Forma de Pagamento", 0,3, null, botaoCadastro, 0);
+                            opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "FORMA DE PAGAMENTO", 0,3, null, botaoCadastro, 0);
                             switch (opcaoCadastro){
                                 case 0://Cadastrar
                                     if (formaPagamentoView.cadastrarFormaPagamento()) {
@@ -187,7 +187,7 @@ public class Main {
                             }
                             break;
                         case 4://Categoria
-                            opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Categoria", 0,3, null, botaoCadastro, 0);
+                            opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "CATEGORIA", 0,3, null, botaoCadastro, 0);
                             switch (opcaoCadastro){
                                 case 0://Cadastrar
                                     if (categoriaView.cadastrarCategoria()) {
@@ -220,7 +220,7 @@ public class Main {
                             }
                             break;
                         case 5://Marca
-                            opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "Marca", 0,3, null, botaoCadastro, 0);
+                            opcaoCadastro = JOptionPane.showOptionDialog(null, "Selecione uma opção", "MARCA", 0,3, null, botaoCadastro, 0);
                             switch (opcaoCadastro){
                                 case 0://Cadastrar
                                     if (marcaView.cadastrarMarca()) {
@@ -233,7 +233,12 @@ public class Main {
                                     break;
                                 case 2://Alterar
                                     resultadoRetorno = marcaView.consultarMarca();
-                                    int id = Integer.parseInt(JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id da marca para atualizar: "));
+                                    String input = JOptionPane.showInputDialog(null, resultadoRetorno + "Informe o id da marca para atualizar:");
+                                    if (input == null || input.trim().isEmpty()) {
+                                        JOptionPane.showMessageDialog(null, "Operação cancelada.");
+                                        break;
+                                    }
+                                    int id = Integer.parseInt(input);
                                     if (marcaView.alterarMarca(id)) {
                                         JOptionPane.showMessageDialog(null, "Marca atualizada com sucesso!");
                                     }

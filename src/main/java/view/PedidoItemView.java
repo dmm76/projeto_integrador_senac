@@ -135,20 +135,20 @@ public class PedidoItemView {
         List<PedidoItem> lista = pedidoItemDao.buscarPorIdPedido(idPedido);
         StringBuilder sb = new StringBuilder("Itens do Pedido nº: " + idPedido + "\n");
         sb.append("ID - Item - Quantidade - Valor Unitário - Valor Total\n");
-
+        double valorRetorno = 0.0;
         for (PedidoItem p : lista) {
+            valorRetorno += p.getValorTotalItem();
             sb.append(p.getIdPedidoItem()).append(" - ")
                     .append(p.getItem().getNomeProduto()).append(" - ")
                     .append(p.getQuantidadeItem()).append(" - ")
                     .append(String.format("R$ %.2f", p.getValorItem())).append(" - ")
                     .append(String.format("R$ %.2f", p.getValorTotalItem())).append("\n");
         }
-
         if (lista.isEmpty()) {
             sb.append("Nenhum item encontrado para esse pedido.");
         }
-
         em.close();
+        sb.append("\nValor Total do Pedido: ").append(String.format("R$ %.2f", valorRetorno)).append("\n\n");
         return sb.toString();
     }
     public String consultarPedidoItemComFiltro() {

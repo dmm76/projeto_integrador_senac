@@ -60,23 +60,18 @@ public class MarcaView {
         //conexao com o banco
         EntityManager em = JPAUtil.getEntityManager();
         MarcaDao marcaDao = new MarcaDao(em);
-
         Marca marca = marcaDao.buscarPorID(id);
         if (marca == null) {
             JOptionPane.showMessageDialog(null, "Marca não encontrada.");
             em.close();
             return false;
         }
-
         String descricao = JOptionPane.showInputDialog("Digite a nova descrição da marca:" , marca.getDescricao());
         if (descricao == null || descricao.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
             em.close();
             return false;
         }
-
-
-
         em.getTransaction().begin();
         marca.setDescricao(descricao);
         em.getTransaction().commit();
@@ -88,14 +83,12 @@ public class MarcaView {
         //conexao com o banco
         EntityManager em = JPAUtil.getEntityManager();
         MarcaDao marcaDao = new MarcaDao(em);
-
         Marca marca = marcaDao.buscarPorID(id);
         if (marca == null) {
             JOptionPane.showMessageDialog(null, "Marca não encontrada.");
             em.close();
             return false;
         }
-
         em.getTransaction().begin();
         em.remove(marca);
         em.getTransaction().commit();
