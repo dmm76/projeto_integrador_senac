@@ -1,5 +1,4 @@
 package view;
-
 import dao.PedidoItemDao;
 import model.*;
 import util.JPAUtil;
@@ -7,7 +6,6 @@ import util.JPAUtil;
 import javax.persistence.EntityManager;
 import javax.swing.*;
 import java.util.List;
-
 public class PedidoItemView {
     public boolean cadastrarPedidoItem() {
         EntityManager em = JPAUtil.getEntityManager();
@@ -131,7 +129,6 @@ public class PedidoItemView {
     public String consultarPedidoItemPorPedido(int idPedido) {
         EntityManager em = JPAUtil.getEntityManager();
         PedidoItemDao pedidoItemDao = new PedidoItemDao(em);
-
         List<PedidoItem> lista = pedidoItemDao.buscarPorIdPedido(idPedido);
         StringBuilder sb = new StringBuilder("Itens do Pedido nº: " + idPedido + "\n");
         sb.append("ID - Item - Quantidade - Valor Unitário - Valor Total\n");
@@ -158,17 +155,14 @@ public class PedidoItemView {
                 "Consulta de Itens",
                 JOptionPane.YES_NO_CANCEL_OPTION
         );
-
         if (escolha == JOptionPane.CANCEL_OPTION || escolha == JOptionPane.CLOSED_OPTION) {
             return "Consulta cancelada.";
         }
-
         if (escolha == JOptionPane.YES_OPTION) {
             String idPedidoStr = JOptionPane.showInputDialog("Digite o ID do Pedido:");
             if (idPedidoStr == null || idPedidoStr.trim().isEmpty()) {
                 return "ID não informado. Consulta cancelada.";
             }
-
             try {
                 int idPedido = Integer.parseInt(idPedidoStr);
                 return consultarPedidoItemPorPedido(idPedido);

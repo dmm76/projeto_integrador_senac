@@ -1,5 +1,4 @@
 package view;
-
 import dao.CategoriaDao;
 import model.Categoria;
 import util.JPAUtil;
@@ -7,21 +6,17 @@ import util.JPAUtil;
 import javax.persistence.EntityManager;
 import javax.swing.*;
 import java.util.List;
-
 public class CategoriaView {
-
     public boolean cadastrarCategoria(){
         //conexao com o banco
         EntityManager em = JPAUtil.getEntityManager();
         CategoriaDao categoriaDao = new CategoriaDao(em);
-
         String descricao = JOptionPane.showInputDialog(null, "Digite a descrição da categoria");
         if (descricao == null || descricao.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
             em.close();
             return false;
         }
-
         Categoria categoria = new Categoria(descricao);
         em.getTransaction().begin();
         categoriaDao.cadastrar(categoria);
@@ -77,7 +72,7 @@ public class CategoriaView {
         //conexao com o banco
         EntityManager em = JPAUtil.getEntityManager();
         CategoriaDao categoriaDao = new CategoriaDao(em);
-       Categoria categoria = categoriaDao.buscarPorID(id);
+        Categoria categoria = categoriaDao.buscarPorID(id);
         if (categoria == null) {
             JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
             em.close();

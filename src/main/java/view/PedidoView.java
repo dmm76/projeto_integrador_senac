@@ -1,5 +1,4 @@
 package view;
-
 import dao.FormaPagamentoDao;
 import dao.PedidoDao;
 import model.Cliente;
@@ -13,9 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
 public class PedidoView {
-
     public boolean cadastrarPedido() {
         EntityManager em = JPAUtil.getEntityManager();
         PedidoDao pedidoDao = new PedidoDao(em);
@@ -93,16 +90,12 @@ public class PedidoView {
         //conexao com o banco
         EntityManager em = JPAUtil.getEntityManager();
         PedidoDao pedidoDao = new PedidoDao(em);
-
         FormaPagamentoDao formaPagamentoDao = new FormaPagamentoDao(em);
-
         Pedido pedido = pedidoDao.buscarPorID(id);
-
         if (pedido == null) {
             JOptionPane.showMessageDialog(null, "Pedido não encontrado!");
             return false;
         }
-
         try {
             String dataStr = JOptionPane.showInputDialog(
                     null,
@@ -120,7 +113,6 @@ public class PedidoView {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
                 return false;
             }
-
             FormaPagamentoView formaPagamentoView = new FormaPagamentoView();
             JOptionPane.showMessageDialog(null, formaPagamentoView.consultarFormaPagamento());
             String idFormaPagamentoStr = JOptionPane.showInputDialog(null,"Digite o novo ID da Forma de Pagamento: ",pedido.getFormaPagamento().getIdFormaPagamento());            if (idFormaPagamentoStr == null || idFormaPagamentoStr.trim().isEmpty()) {
@@ -128,7 +120,6 @@ public class PedidoView {
                 return false;
             }
             int idFormaPagamento = Integer.parseInt(idFormaPagamentoStr);
-
             ClienteView clienteView = new ClienteView();
             JOptionPane.showMessageDialog(null, clienteView.consultarCliente());
             String idClienteStr = JOptionPane.showInputDialog(null, "Digite a nova ID do Cliente: ", pedido.getCliente().getIdCliente());
@@ -137,17 +128,14 @@ public class PedidoView {
                 return false;
             }
             int idCliente = Integer.parseInt(idClienteStr);
-
             String  valorTotalPedidoStr = JOptionPane.showInputDialog(null, "Digite o novo valor total do pedido: ", pedido.getValorTotalPedido() );
             if (valorTotalPedidoStr == null || valorTotalPedidoStr.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
                 return false;
             }
             double valorTotalPedido = Double.parseDouble(valorTotalPedidoStr);
-
             FormaPagamento formaPagamento = em.find(FormaPagamento.class, idFormaPagamento);
             Cliente cliente = em.find(Cliente.class, idCliente);
-
             em.getTransaction().begin();
             pedido.setDataPedido(dataPedido);
             pedido.setStatusPedido(statusPedido);
@@ -155,8 +143,6 @@ public class PedidoView {
             pedido.setCliente(cliente);
             pedido.setValorTotalPedido(valorTotalPedido);
             em.getTransaction().commit();
-
-            //JOptionPane.showMessageDialog(null, "Pedido atualizado com sucesso!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
         } finally {
@@ -174,12 +160,10 @@ public class PedidoView {
             JOptionPane.showMessageDialog(null, "Pedido não encontrado!");
             return false;
         }
-
         em.getTransaction().begin();
         pedidoDao.remover(pedido);
         em.getTransaction().commit();
         em.close();
         return true;
-        //JOptionPane.showMessageDialog(null, "Pedido removido com sucesso!");
     }
 }

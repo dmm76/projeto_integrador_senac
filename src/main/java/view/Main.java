@@ -1,7 +1,5 @@
 package view;
-
 import javax.swing.*;
-
 public class Main {
     public static void main(String[] args) {
         UIManager.put("OptionPane.buttonClickThreshhold", 500);
@@ -17,7 +15,6 @@ public class Main {
         String[] botao = {"Gerenciar", "Pedido", "Pedido Itens", "Encerrar"};
         String[] botaoEscolha= {"Cliente", "Fornecedor", "ProdutoItem", "FormaPagamento", "Categoria", "Marca", "Voltar"};
         String[] botaoCadastro = {"Cadastrar", "Consultar", "Alterar", "Deletar", "Voltar"};
-
         ClienteView clienteView = new ClienteView();
         FornecedorView fornecedorView = new FornecedorView();
         ItemView itemView = new ItemView();
@@ -25,8 +22,7 @@ public class Main {
         CategoriaView categoriaView = new CategoriaView();
         MarcaView marcaView = new MarcaView();
         PedidoView pedidoView = new PedidoView();
-       PedidoItemView pedidoItemView = new PedidoItemView();
-
+        PedidoItemView pedidoItemView = new PedidoItemView();
         int opcao = 0, opcaoEscolha, opcaoCadastro;
         do{
             opcao = JOptionPane.showOptionDialog(null, "Selecione uma opção", "CADASTRO", 0,3, null, botao, 0);
@@ -265,15 +261,15 @@ public class Main {
                                         JOptionPane.YES_NO_OPTION);
                                 if (resposta == JOptionPane.YES_OPTION) {
                                     int respostaContinua = 0;
-                                do{
-                                    if (pedidoItemView.cadastrarPedidoItem()) {
-                                        JOptionPane.showMessageDialog(null, "Item Pedido cadastrado com sucesso");
-                                    }
-                                    respostaContinua = JOptionPane.showConfirmDialog(null,
-                                            "Deseja adicionar mais itens a este pedido agora?",
-                                            "Adicionar Itens",
-                                            JOptionPane.YES_NO_OPTION);
-                                }while(respostaContinua != JOptionPane.NO_OPTION);
+                                    do{
+                                        if (pedidoItemView.cadastrarPedidoItem()) {
+                                            JOptionPane.showMessageDialog(null, "Item Pedido cadastrado com sucesso");
+                                        }
+                                        respostaContinua = JOptionPane.showConfirmDialog(null,
+                                                "Deseja adicionar mais itens a este pedido agora?",
+                                                "Adicionar Itens",
+                                                JOptionPane.YES_NO_OPTION);
+                                    }while(respostaContinua != JOptionPane.NO_OPTION);
 
                                 } else if(resposta == JOptionPane.NO_OPTION){
                                     JOptionPane.showMessageDialog(null, "Item Pedido cancelado");

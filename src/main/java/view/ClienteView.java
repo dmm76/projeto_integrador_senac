@@ -1,5 +1,4 @@
 package view;
-
 import dao.ClienteDao;
 import model.Cliente;
 import util.JPAUtil;
@@ -7,14 +6,11 @@ import util.JPAUtil;
 import javax.persistence.EntityManager;
 import javax.swing.*;
 import java.util.List;
-
 public class ClienteView {
-
     public boolean cadastrarCliente() {
         //conexao com o banco
         EntityManager em = JPAUtil.getEntityManager();
         ClienteDao  clienteDao = new ClienteDao(em);
-
         String nomeCliente = JOptionPane.showInputDialog(null, "Digite o nome: ");
         if (nomeCliente == null || nomeCliente.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
@@ -45,9 +41,7 @@ public class ClienteView {
             em.close();
             return false;
         }
-
         Cliente cliente = new Cliente(nomeCliente, cpfCliente, emailCliente, telefoneCliente, enderecoCliente);
-
         em.getTransaction().begin();
         clienteDao.cadastrar(cliente);
         em.getTransaction().commit();
@@ -59,7 +53,6 @@ public class ClienteView {
         EntityManager em = JPAUtil.getEntityManager();
         ClienteDao clienteDao = new ClienteDao(em);
         String resultado = null;
-
         List<Cliente> todosRegistros = clienteDao.buscarTodos();
         if (todosRegistros.isEmpty()) {
             em.close();
@@ -89,42 +82,36 @@ public class ClienteView {
             em.close();
             return false;
         }
-
         String nomeCliente = JOptionPane.showInputDialog("Digite o nome:", cliente.getNomeCliente());
         if (nomeCliente == null || nomeCliente.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Alteração cancelada.");
             em.close();
             return false;
         }
-
         String cpfCliente = JOptionPane.showInputDialog("Digite o CPF:", cliente.getCpfCliente());
         if (cpfCliente == null || cpfCliente.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Alteração cancelada.");
             em.close();
             return false;
         }
-
         String emailCliente = JOptionPane.showInputDialog("Digite o e-mail:", cliente.getEmailCliente());
         if (emailCliente == null || emailCliente.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Alteração cancelada.");
             em.close();
             return false;
         }
-
         String telefoneCliente = JOptionPane.showInputDialog("Digite o telefone:", cliente.getTelefoneCliente());
         if (telefoneCliente == null || telefoneCliente.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Alteração cancelada.");
             em.close();
             return false;
         }
-
         String enderecoCliente = JOptionPane.showInputDialog("Digite o endereço:", cliente.getEnderecoCliente());
         if (enderecoCliente == null || enderecoCliente.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Alteração cancelada.");
             em.close();
             return false;
         }
-
         em.getTransaction().begin();
         cliente.setNomeCliente(nomeCliente);
         cliente.setCpfCliente(cpfCliente);
@@ -139,14 +126,12 @@ public class ClienteView {
         //conexao com o banco
         EntityManager em = JPAUtil.getEntityManager();
         ClienteDao clienteDao = new ClienteDao(em);
-
         Cliente cliente = clienteDao.buscarPorID(id);
         if (cliente == null) {
             JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
             em.close();
             return false;
         }
-
         em.getTransaction().begin();
         em.remove(cliente);
         em.getTransaction().commit();

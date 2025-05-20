@@ -1,19 +1,15 @@
 package view;
-
 import dao.FormaPagamentoDao;
 import model.FormaPagamento;
 import util.JPAUtil;
-
 import javax.persistence.EntityManager;
 import javax.swing.*;
 import java.util.List;
-
 public class FormaPagamentoView {
     public boolean cadastrarFormaPagamento(){
         //conexao com o banco
         EntityManager em = JPAUtil.getEntityManager();
         FormaPagamentoDao formaPagamentoDao = new FormaPagamentoDao(em);
-
         String descricao = JOptionPane.showInputDialog(null, "Digite a descrição da forma de pagamento");
         if (descricao == null || descricao.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
@@ -32,7 +28,6 @@ public class FormaPagamentoView {
         EntityManager em = JPAUtil.getEntityManager();
         FormaPagamentoDao formaPagamentoDao = new FormaPagamentoDao(em);
         String resultado = "";
-
         List<FormaPagamento> todosRegistros = formaPagamentoDao.buscarTodos();
         if (todosRegistros.isEmpty()) {
             em.close();
@@ -52,7 +47,6 @@ public class FormaPagamentoView {
         //conexao com o banco
         EntityManager em = JPAUtil.getEntityManager();
         FormaPagamentoDao formaPagamentoDao = new FormaPagamentoDao(em);
-
         FormaPagamento formaPagamento = formaPagamentoDao.buscarPorID(id);
         if (formaPagamento == null) {
             JOptionPane.showMessageDialog(null, "Forma de pagamento não encontrada.");
@@ -65,7 +59,6 @@ public class FormaPagamentoView {
             em.close();
             return false;
         }
-
         em.getTransaction().begin();
         formaPagamento.setDescricao(novaDescricao);
         em.getTransaction().commit();
@@ -76,14 +69,12 @@ public class FormaPagamentoView {
         //conexao com o banco
         EntityManager em = JPAUtil.getEntityManager();
         FormaPagamentoDao formaPagamentoDao = new FormaPagamentoDao(em);
-
         FormaPagamento formaPagamento = formaPagamentoDao.buscarPorID(id);
         if (formaPagamento == null) {
             JOptionPane.showMessageDialog(null, "Forma de pagamento não encontrada.");
             em.close();
             return false;
         }
-
         em.getTransaction().begin();
         em.remove(formaPagamento);
         em.getTransaction().commit();
