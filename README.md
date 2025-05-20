@@ -1,7 +1,7 @@
 <table>
   <tr>
     <td>
-      <img src="https://github.com/dmm76/tcc_senac/blob/main/src/main/java/util/images/BR_Sistema_LOGO2.png?raw=true" alt="Logo_BR" width="150">
+      <img src="https://github.com/dmm76/tcc_senac/projeto_integrador_senac/main/src/main/java/util/images/BR_Sistema_LOGO2.png?raw=true" alt="Logo_BR" width="150">
     </td>
     <td>
       <h1>Sistema Bar e Restaurantes (Senac)</h1>
